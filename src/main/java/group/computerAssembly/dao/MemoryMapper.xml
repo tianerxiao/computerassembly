@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="group.computerAssembly.dao.MemoryMapper" >
+  <resultMap id="BaseResultMap" type="group.computerAssembly.entity.Memory" >
+    <constructor >
+      <idArg column="mem_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="mem_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="mem_price" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="mem_href" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="group.computerAssembly.entity.Memory" >
+    <constructor >
+      <idArg column="mem_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="mem_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="mem_price" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="mem_href" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="mem_describe" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    mem_id, mem_name, mem_price, mem_href
+  </sql>
+  <sql id="Blob_Column_List" >
+    mem_describe
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="group.computerAssembly.entity.MemoryExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from memory
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="group.computerAssembly.entity.MemoryExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from memory
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from memory
+    where mem_id = #{memId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from memory
+    where mem_id = #{memId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="group.computerAssembly.entity.Memory" >
+    insert into memory (mem_id, mem_name, mem_price, 
+      mem_href, mem_describe)
+    values (#{memId,jdbcType=INTEGER}, #{memName,jdbcType=VARCHAR}, #{memPrice,jdbcType=VARCHAR}, 
+      #{memHref,jdbcType=VARCHAR}, #{memDescribe,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="group.computerAssembly.entity.Memory" >
+    insert into memory
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="memId != null" >
+        mem_id,
+      </if>
+      <if test="memName != null" >
+        mem_name,
+      </if>
+      <if test="memPrice != null" >
+        mem_price,
+      </if>
+      <if test="memHref != null" >
+        mem_href,
+      </if>
+      <if test="memDescribe != null" >
+        mem_describe,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="memId != null" >
+        #{memId,jdbcType=INTEGER},
+      </if>
+      <if test="memName != null" >
+        #{memName,jdbcType=VARCHAR},
+      </if>
+      <if test="memPrice != null" >
+        #{memPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="memHref != null" >
+        #{memHref,jdbcType=VARCHAR},
+      </if>
+      <if test="memDescribe != null" >
+        #{memDescribe,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="group.computerAssembly.entity.Memory" >
+    update memory
+    <set >
+      <if test="memName != null" >
+        mem_name = #{memName,jdbcType=VARCHAR},
+      </if>
+      <if test="memPrice != null" >
+        mem_price = #{memPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="memHref != null" >
+        mem_href = #{memHref,jdbcType=VARCHAR},
+      </if>
+      <if test="memDescribe != null" >
+        mem_describe = #{memDescribe,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where mem_id = #{memId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="group.computerAssembly.entity.Memory" >
+    update memory
+    set mem_name = #{memName,jdbcType=VARCHAR},
+      mem_price = #{memPrice,jdbcType=VARCHAR},
+      mem_href = #{memHref,jdbcType=VARCHAR},
+      mem_describe = #{memDescribe,jdbcType=LONGVARCHAR}
+    where mem_id = #{memId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="group.computerAssembly.entity.Memory" >
+    update memory
+    set mem_name = #{memName,jdbcType=VARCHAR},
+      mem_price = #{memPrice,jdbcType=VARCHAR},
+      mem_href = #{memHref,jdbcType=VARCHAR}
+    where mem_id = #{memId,jdbcType=INTEGER}
+  </update>
+</mapper>

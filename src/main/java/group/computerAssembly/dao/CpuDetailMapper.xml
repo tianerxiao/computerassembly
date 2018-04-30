@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="group.computerAssembly.dao.CpuDetailMapper" >
+  <resultMap id="BaseResultMap" type="group.computerAssembly.entity.CpuDetail" >
+    <constructor >
+      <idArg column="cpud_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="cpud_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="cpud_vendor" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="cpud_core" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="cpud_mainfreq" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="cpud_craft" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    cpud_id, cpud_name, cpud_vendor, cpud_core, cpud_mainfreq, cpud_craft
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="group.computerAssembly.entity.CpuDetailExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from cpu_detail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from cpu_detail
+    where cpud_id = #{cpudId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from cpu_detail
+    where cpud_id = #{cpudId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="group.computerAssembly.entity.CpuDetail" >
+    insert into cpu_detail (cpud_id, cpud_name, cpud_vendor, 
+      cpud_core, cpud_mainfreq, cpud_craft
+      )
+    values (#{cpudId,jdbcType=INTEGER}, #{cpudName,jdbcType=VARCHAR}, #{cpudVendor,jdbcType=VARCHAR}, 
+      #{cpudCore,jdbcType=VARCHAR}, #{cpudMainfreq,jdbcType=VARCHAR}, #{cpudCraft,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="group.computerAssembly.entity.CpuDetail" >
+    insert into cpu_detail
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="cpudId != null" >
+        cpud_id,
+      </if>
+      <if test="cpudName != null" >
+        cpud_name,
+      </if>
+      <if test="cpudVendor != null" >
+        cpud_vendor,
+      </if>
+      <if test="cpudCore != null" >
+        cpud_core,
+      </if>
+      <if test="cpudMainfreq != null" >
+        cpud_mainfreq,
+      </if>
+      <if test="cpudCraft != null" >
+        cpud_craft,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="cpudId != null" >
+        #{cpudId,jdbcType=INTEGER},
+      </if>
+      <if test="cpudName != null" >
+        #{cpudName,jdbcType=VARCHAR},
+      </if>
+      <if test="cpudVendor != null" >
+        #{cpudVendor,jdbcType=VARCHAR},
+      </if>
+      <if test="cpudCore != null" >
+        #{cpudCore,jdbcType=VARCHAR},
+      </if>
+      <if test="cpudMainfreq != null" >
+        #{cpudMainfreq,jdbcType=VARCHAR},
+      </if>
+      <if test="cpudCraft != null" >
+        #{cpudCraft,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="group.computerAssembly.entity.CpuDetail" >
+    update cpu_detail
+    <set >
+      <if test="cpudName != null" >
+        cpud_name = #{cpudName,jdbcType=VARCHAR},
+      </if>
+      <if test="cpudVendor != null" >
+        cpud_vendor = #{cpudVendor,jdbcType=VARCHAR},
+      </if>
+      <if test="cpudCore != null" >
+        cpud_core = #{cpudCore,jdbcType=VARCHAR},
+      </if>
+      <if test="cpudMainfreq != null" >
+        cpud_mainfreq = #{cpudMainfreq,jdbcType=VARCHAR},
+      </if>
+      <if test="cpudCraft != null" >
+        cpud_craft = #{cpudCraft,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where cpud_id = #{cpudId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="group.computerAssembly.entity.CpuDetail" >
+    update cpu_detail
+    set cpud_name = #{cpudName,jdbcType=VARCHAR},
+      cpud_vendor = #{cpudVendor,jdbcType=VARCHAR},
+      cpud_core = #{cpudCore,jdbcType=VARCHAR},
+      cpud_mainfreq = #{cpudMainfreq,jdbcType=VARCHAR},
+      cpud_craft = #{cpudCraft,jdbcType=VARCHAR}
+    where cpud_id = #{cpudId,jdbcType=INTEGER}
+  </update>
+</mapper>

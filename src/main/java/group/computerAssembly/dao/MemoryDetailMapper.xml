@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="group.computerAssembly.dao.MemoryDetailMapper" >
+  <resultMap id="BaseResultMap" type="group.computerAssembly.entity.MemoryDetail" >
+    <constructor >
+      <idArg column="memd_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="memd_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="memd_type" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="memd_freq" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="memd_size" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="memd_describe" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    memd_id, memd_name, memd_type, memd_freq, memd_size, memd_describe
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="group.computerAssembly.entity.MemoryDetailExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from memory_detail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from memory_detail
+    where memd_id = #{memdId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from memory_detail
+    where memd_id = #{memdId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="group.computerAssembly.entity.MemoryDetail" >
+    insert into memory_detail (memd_id, memd_name, memd_type, 
+      memd_freq, memd_size, memd_describe
+      )
+    values (#{memdId,jdbcType=INTEGER}, #{memdName,jdbcType=VARCHAR}, #{memdType,jdbcType=VARCHAR}, 
+      #{memdFreq,jdbcType=VARCHAR}, #{memdSize,jdbcType=VARCHAR}, #{memdDescribe,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="group.computerAssembly.entity.MemoryDetail" >
+    insert into memory_detail
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="memdId != null" >
+        memd_id,
+      </if>
+      <if test="memdName != null" >
+        memd_name,
+      </if>
+      <if test="memdType != null" >
+        memd_type,
+      </if>
+      <if test="memdFreq != null" >
+        memd_freq,
+      </if>
+      <if test="memdSize != null" >
+        memd_size,
+      </if>
+      <if test="memdDescribe != null" >
+        memd_describe,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="memdId != null" >
+        #{memdId,jdbcType=INTEGER},
+      </if>
+      <if test="memdName != null" >
+        #{memdName,jdbcType=VARCHAR},
+      </if>
+      <if test="memdType != null" >
+        #{memdType,jdbcType=VARCHAR},
+      </if>
+      <if test="memdFreq != null" >
+        #{memdFreq,jdbcType=VARCHAR},
+      </if>
+      <if test="memdSize != null" >
+        #{memdSize,jdbcType=VARCHAR},
+      </if>
+      <if test="memdDescribe != null" >
+        #{memdDescribe,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="group.computerAssembly.entity.MemoryDetail" >
+    update memory_detail
+    <set >
+      <if test="memdName != null" >
+        memd_name = #{memdName,jdbcType=VARCHAR},
+      </if>
+      <if test="memdType != null" >
+        memd_type = #{memdType,jdbcType=VARCHAR},
+      </if>
+      <if test="memdFreq != null" >
+        memd_freq = #{memdFreq,jdbcType=VARCHAR},
+      </if>
+      <if test="memdSize != null" >
+        memd_size = #{memdSize,jdbcType=VARCHAR},
+      </if>
+      <if test="memdDescribe != null" >
+        memd_describe = #{memdDescribe,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where memd_id = #{memdId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="group.computerAssembly.entity.MemoryDetail" >
+    update memory_detail
+    set memd_name = #{memdName,jdbcType=VARCHAR},
+      memd_type = #{memdType,jdbcType=VARCHAR},
+      memd_freq = #{memdFreq,jdbcType=VARCHAR},
+      memd_size = #{memdSize,jdbcType=VARCHAR},
+      memd_describe = #{memdDescribe,jdbcType=VARCHAR}
+    where memd_id = #{memdId,jdbcType=INTEGER}
+  </update>
+</mapper>

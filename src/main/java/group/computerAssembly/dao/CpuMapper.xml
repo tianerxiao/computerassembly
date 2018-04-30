@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="group.computerAssembly.dao.CpuMapper" >
+  <resultMap id="BaseResultMap" type="group.computerAssembly.entity.Cpu" >
+    <constructor >
+      <idArg column="cpu_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="cpu_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="cpu_price" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="cpu_href" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="group.computerAssembly.entity.Cpu" >
+    <constructor >
+      <idArg column="cpu_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="cpu_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="cpu_price" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="cpu_href" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="cpu_describe" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    cpu_id, cpu_name, cpu_price, cpu_href
+  </sql>
+  <sql id="Blob_Column_List" >
+    cpu_describe
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="group.computerAssembly.entity.CpuExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from cpu
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="group.computerAssembly.entity.CpuExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from cpu
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from cpu
+    where cpu_id = #{cpuId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from cpu
+    where cpu_id = #{cpuId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="group.computerAssembly.entity.Cpu" >
+    insert into cpu (cpu_id, cpu_name, cpu_price, 
+      cpu_href, cpu_describe)
+    values (#{cpuId,jdbcType=INTEGER}, #{cpuName,jdbcType=VARCHAR}, #{cpuPrice,jdbcType=VARCHAR}, 
+      #{cpuHref,jdbcType=VARCHAR}, #{cpuDescribe,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="group.computerAssembly.entity.Cpu" >
+    insert into cpu
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="cpuId != null" >
+        cpu_id,
+      </if>
+      <if test="cpuName != null" >
+        cpu_name,
+      </if>
+      <if test="cpuPrice != null" >
+        cpu_price,
+      </if>
+      <if test="cpuHref != null" >
+        cpu_href,
+      </if>
+      <if test="cpuDescribe != null" >
+        cpu_describe,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="cpuId != null" >
+        #{cpuId,jdbcType=INTEGER},
+      </if>
+      <if test="cpuName != null" >
+        #{cpuName,jdbcType=VARCHAR},
+      </if>
+      <if test="cpuPrice != null" >
+        #{cpuPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="cpuHref != null" >
+        #{cpuHref,jdbcType=VARCHAR},
+      </if>
+      <if test="cpuDescribe != null" >
+        #{cpuDescribe,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="group.computerAssembly.entity.Cpu" >
+    update cpu
+    <set >
+      <if test="cpuName != null" >
+        cpu_name = #{cpuName,jdbcType=VARCHAR},
+      </if>
+      <if test="cpuPrice != null" >
+        cpu_price = #{cpuPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="cpuHref != null" >
+        cpu_href = #{cpuHref,jdbcType=VARCHAR},
+      </if>
+      <if test="cpuDescribe != null" >
+        cpu_describe = #{cpuDescribe,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where cpu_id = #{cpuId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="group.computerAssembly.entity.Cpu" >
+    update cpu
+    set cpu_name = #{cpuName,jdbcType=VARCHAR},
+      cpu_price = #{cpuPrice,jdbcType=VARCHAR},
+      cpu_href = #{cpuHref,jdbcType=VARCHAR},
+      cpu_describe = #{cpuDescribe,jdbcType=LONGVARCHAR}
+    where cpu_id = #{cpuId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="group.computerAssembly.entity.Cpu" >
+    update cpu
+    set cpu_name = #{cpuName,jdbcType=VARCHAR},
+      cpu_price = #{cpuPrice,jdbcType=VARCHAR},
+      cpu_href = #{cpuHref,jdbcType=VARCHAR}
+    where cpu_id = #{cpuId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="group.computerAssembly.dao.BoardMapper" >
+  <resultMap id="BaseResultMap" type="group.computerAssembly.entity.Board" >
+    <constructor >
+      <idArg column="board_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="board_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="board_price" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="board_href" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="group.computerAssembly.entity.Board" >
+    <constructor >
+      <idArg column="board_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="board_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="board_price" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="board_href" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="board_describe" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    board_id, board_name, board_price, board_href
+  </sql>
+  <sql id="Blob_Column_List" >
+    board_describe
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="group.computerAssembly.entity.BoardExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from board
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="group.computerAssembly.entity.BoardExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from board
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from board
+    where board_id = #{boardId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from board
+    where board_id = #{boardId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="group.computerAssembly.entity.Board" >
+    insert into board (board_id, board_name, board_price, 
+      board_href, board_describe)
+    values (#{boardId,jdbcType=INTEGER}, #{boardName,jdbcType=VARCHAR}, #{boardPrice,jdbcType=VARCHAR}, 
+      #{boardHref,jdbcType=VARCHAR}, #{boardDescribe,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="group.computerAssembly.entity.Board" >
+    insert into board
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="boardId != null" >
+        board_id,
+      </if>
+      <if test="boardName != null" >
+        board_name,
+      </if>
+      <if test="boardPrice != null" >
+        board_price,
+      </if>
+      <if test="boardHref != null" >
+        board_href,
+      </if>
+      <if test="boardDescribe != null" >
+        board_describe,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="boardId != null" >
+        #{boardId,jdbcType=INTEGER},
+      </if>
+      <if test="boardName != null" >
+        #{boardName,jdbcType=VARCHAR},
+      </if>
+      <if test="boardPrice != null" >
+        #{boardPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="boardHref != null" >
+        #{boardHref,jdbcType=VARCHAR},
+      </if>
+      <if test="boardDescribe != null" >
+        #{boardDescribe,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="group.computerAssembly.entity.Board" >
+    update board
+    <set >
+      <if test="boardName != null" >
+        board_name = #{boardName,jdbcType=VARCHAR},
+      </if>
+      <if test="boardPrice != null" >
+        board_price = #{boardPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="boardHref != null" >
+        board_href = #{boardHref,jdbcType=VARCHAR},
+      </if>
+      <if test="boardDescribe != null" >
+        board_describe = #{boardDescribe,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where board_id = #{boardId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="group.computerAssembly.entity.Board" >
+    update board
+    set board_name = #{boardName,jdbcType=VARCHAR},
+      board_price = #{boardPrice,jdbcType=VARCHAR},
+      board_href = #{boardHref,jdbcType=VARCHAR},
+      board_describe = #{boardDescribe,jdbcType=LONGVARCHAR}
+    where board_id = #{boardId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="group.computerAssembly.entity.Board" >
+    update board
+    set board_name = #{boardName,jdbcType=VARCHAR},
+      board_price = #{boardPrice,jdbcType=VARCHAR},
+      board_href = #{boardHref,jdbcType=VARCHAR}
+    where board_id = #{boardId,jdbcType=INTEGER}
+  </update>
+</mapper>

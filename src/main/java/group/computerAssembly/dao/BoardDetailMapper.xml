@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="group.computerAssembly.dao.BoardDetailMapper" >
+  <resultMap id="BaseResultMap" type="group.computerAssembly.entity.BoardDetail" >
+    <constructor >
+      <idArg column="boardd_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="boardd_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="boardd_cpu" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="boardd_chipset" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="boardd_arch" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    boardd_id, boardd_name, boardd_cpu, boardd_chipset, boardd_arch
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="group.computerAssembly.entity.BoardDetailExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from board_detail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from board_detail
+    where boardd_id = #{boarddId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from board_detail
+    where boardd_id = #{boarddId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="group.computerAssembly.entity.BoardDetail" >
+    insert into board_detail (boardd_id, boardd_name, boardd_cpu, 
+      boardd_chipset, boardd_arch)
+    values (#{boarddId,jdbcType=INTEGER}, #{boarddName,jdbcType=VARCHAR}, #{boarddCpu,jdbcType=VARCHAR}, 
+      #{boarddChipset,jdbcType=VARCHAR}, #{boarddArch,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="group.computerAssembly.entity.BoardDetail" >
+    insert into board_detail
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="boarddId != null" >
+        boardd_id,
+      </if>
+      <if test="boarddName != null" >
+        boardd_name,
+      </if>
+      <if test="boarddCpu != null" >
+        boardd_cpu,
+      </if>
+      <if test="boarddChipset != null" >
+        boardd_chipset,
+      </if>
+      <if test="boarddArch != null" >
+        boardd_arch,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="boarddId != null" >
+        #{boarddId,jdbcType=INTEGER},
+      </if>
+      <if test="boarddName != null" >
+        #{boarddName,jdbcType=VARCHAR},
+      </if>
+      <if test="boarddCpu != null" >
+        #{boarddCpu,jdbcType=VARCHAR},
+      </if>
+      <if test="boarddChipset != null" >
+        #{boarddChipset,jdbcType=VARCHAR},
+      </if>
+      <if test="boarddArch != null" >
+        #{boarddArch,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="group.computerAssembly.entity.BoardDetail" >
+    update board_detail
+    <set >
+      <if test="boarddName != null" >
+        boardd_name = #{boarddName,jdbcType=VARCHAR},
+      </if>
+      <if test="boarddCpu != null" >
+        boardd_cpu = #{boarddCpu,jdbcType=VARCHAR},
+      </if>
+      <if test="boarddChipset != null" >
+        boardd_chipset = #{boarddChipset,jdbcType=VARCHAR},
+      </if>
+      <if test="boarddArch != null" >
+        boardd_arch = #{boarddArch,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where boardd_id = #{boarddId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="group.computerAssembly.entity.BoardDetail" >
+    update board_detail
+    set boardd_name = #{boarddName,jdbcType=VARCHAR},
+      boardd_cpu = #{boarddCpu,jdbcType=VARCHAR},
+      boardd_chipset = #{boarddChipset,jdbcType=VARCHAR},
+      boardd_arch = #{boarddArch,jdbcType=VARCHAR}
+    where boardd_id = #{boarddId,jdbcType=INTEGER}
+  </update>
+</mapper>

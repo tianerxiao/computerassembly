@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="computerassembly:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="computerAssembly.war">
+      <element id="artifact" artifact-name="computerassembly:war exploded" />
+    </root>
+  </artifact>
+</component>

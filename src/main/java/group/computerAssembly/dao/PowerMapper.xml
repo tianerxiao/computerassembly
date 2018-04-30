@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="group.computerAssembly.dao.PowerMapper" >
+  <resultMap id="BaseResultMap" type="group.computerAssembly.entity.Power" >
+    <constructor >
+      <idArg column="power_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="power_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="power_price" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="power_href" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="group.computerAssembly.entity.Power" >
+    <constructor >
+      <idArg column="power_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="power_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="power_price" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="power_href" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="power_describe" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    power_id, power_name, power_price, power_href
+  </sql>
+  <sql id="Blob_Column_List" >
+    power_describe
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="group.computerAssembly.entity.PowerExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from power
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="group.computerAssembly.entity.PowerExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from power
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from power
+    where power_id = #{powerId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from power
+    where power_id = #{powerId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="group.computerAssembly.entity.Power" >
+    insert into power (power_id, power_name, power_price, 
+      power_href, power_describe)
+    values (#{powerId,jdbcType=INTEGER}, #{powerName,jdbcType=VARCHAR}, #{powerPrice,jdbcType=VARCHAR}, 
+      #{powerHref,jdbcType=VARCHAR}, #{powerDescribe,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="group.computerAssembly.entity.Power" >
+    insert into power
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="powerId != null" >
+        power_id,
+      </if>
+      <if test="powerName != null" >
+        power_name,
+      </if>
+      <if test="powerPrice != null" >
+        power_price,
+      </if>
+      <if test="powerHref != null" >
+        power_href,
+      </if>
+      <if test="powerDescribe != null" >
+        power_describe,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="powerId != null" >
+        #{powerId,jdbcType=INTEGER},
+      </if>
+      <if test="powerName != null" >
+        #{powerName,jdbcType=VARCHAR},
+      </if>
+      <if test="powerPrice != null" >
+        #{powerPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="powerHref != null" >
+        #{powerHref,jdbcType=VARCHAR},
+      </if>
+      <if test="powerDescribe != null" >
+        #{powerDescribe,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="group.computerAssembly.entity.Power" >
+    update power
+    <set >
+      <if test="powerName != null" >
+        power_name = #{powerName,jdbcType=VARCHAR},
+      </if>
+      <if test="powerPrice != null" >
+        power_price = #{powerPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="powerHref != null" >
+        power_href = #{powerHref,jdbcType=VARCHAR},
+      </if>
+      <if test="powerDescribe != null" >
+        power_describe = #{powerDescribe,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where power_id = #{powerId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="group.computerAssembly.entity.Power" >
+    update power
+    set power_name = #{powerName,jdbcType=VARCHAR},
+      power_price = #{powerPrice,jdbcType=VARCHAR},
+      power_href = #{powerHref,jdbcType=VARCHAR},
+      power_describe = #{powerDescribe,jdbcType=LONGVARCHAR}
+    where power_id = #{powerId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="group.computerAssembly.entity.Power" >
+    update power
+    set power_name = #{powerName,jdbcType=VARCHAR},
+      power_price = #{powerPrice,jdbcType=VARCHAR},
+      power_href = #{powerHref,jdbcType=VARCHAR}
+    where power_id = #{powerId,jdbcType=INTEGER}
+  </update>
+</mapper>

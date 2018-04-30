@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="group.computerAssembly.dao.PowerDetailMapper" >
+  <resultMap id="BaseResultMap" type="group.computerAssembly.entity.PowerDetail" >
+    <constructor >
+      <idArg column="powerd_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="powerd_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="powerd_power" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="powerd_standard" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    powerd_id, powerd_name, powerd_power, powerd_standard
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="group.computerAssembly.entity.PowerDetailExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from power_detail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from power_detail
+    where powerd_id = #{powerdId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from power_detail
+    where powerd_id = #{powerdId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="group.computerAssembly.entity.PowerDetail" >
+    insert into power_detail (powerd_id, powerd_name, powerd_power, 
+      powerd_standard)
+    values (#{powerdId,jdbcType=INTEGER}, #{powerdName,jdbcType=VARCHAR}, #{powerdPower,jdbcType=VARCHAR}, 
+      #{powerdStandard,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="group.computerAssembly.entity.PowerDetail" >
+    insert into power_detail
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="powerdId != null" >
+        powerd_id,
+      </if>
+      <if test="powerdName != null" >
+        powerd_name,
+      </if>
+      <if test="powerdPower != null" >
+        powerd_power,
+      </if>
+      <if test="powerdStandard != null" >
+        powerd_standard,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="powerdId != null" >
+        #{powerdId,jdbcType=INTEGER},
+      </if>
+      <if test="powerdName != null" >
+        #{powerdName,jdbcType=VARCHAR},
+      </if>
+      <if test="powerdPower != null" >
+        #{powerdPower,jdbcType=VARCHAR},
+      </if>
+      <if test="powerdStandard != null" >
+        #{powerdStandard,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="group.computerAssembly.entity.PowerDetail" >
+    update power_detail
+    <set >
+      <if test="powerdName != null" >
+        powerd_name = #{powerdName,jdbcType=VARCHAR},
+      </if>
+      <if test="powerdPower != null" >
+        powerd_power = #{powerdPower,jdbcType=VARCHAR},
+      </if>
+      <if test="powerdStandard != null" >
+        powerd_standard = #{powerdStandard,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where powerd_id = #{powerdId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="group.computerAssembly.entity.PowerDetail" >
+    update power_detail
+    set powerd_name = #{powerdName,jdbcType=VARCHAR},
+      powerd_power = #{powerdPower,jdbcType=VARCHAR},
+      powerd_standard = #{powerdStandard,jdbcType=VARCHAR}
+    where powerd_id = #{powerdId,jdbcType=INTEGER}
+  </update>
+</mapper>

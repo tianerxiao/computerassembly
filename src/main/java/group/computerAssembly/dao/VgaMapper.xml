@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="group.computerAssembly.dao.VgaMapper" >
+  <resultMap id="BaseResultMap" type="group.computerAssembly.entity.Vga" >
+    <constructor >
+      <idArg column="vga_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="vga_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="vga_price" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="vga_href" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="group.computerAssembly.entity.Vga" >
+    <constructor >
+      <idArg column="vga_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="vga_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="vga_price" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="vga_href" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="vga_describe" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    vga_id, vga_name, vga_price, vga_href
+  </sql>
+  <sql id="Blob_Column_List" >
+    vga_describe
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="group.computerAssembly.entity.VgaExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from vga
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="group.computerAssembly.entity.VgaExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from vga
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from vga
+    where vga_id = #{vgaId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from vga
+    where vga_id = #{vgaId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="group.computerAssembly.entity.Vga" >
+    insert into vga (vga_id, vga_name, vga_price, 
+      vga_href, vga_describe)
+    values (#{vgaId,jdbcType=INTEGER}, #{vgaName,jdbcType=VARCHAR}, #{vgaPrice,jdbcType=VARCHAR}, 
+      #{vgaHref,jdbcType=VARCHAR}, #{vgaDescribe,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="group.computerAssembly.entity.Vga" >
+    insert into vga
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="vgaId != null" >
+        vga_id,
+      </if>
+      <if test="vgaName != null" >
+        vga_name,
+      </if>
+      <if test="vgaPrice != null" >
+        vga_price,
+      </if>
+      <if test="vgaHref != null" >
+        vga_href,
+      </if>
+      <if test="vgaDescribe != null" >
+        vga_describe,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="vgaId != null" >
+        #{vgaId,jdbcType=INTEGER},
+      </if>
+      <if test="vgaName != null" >
+        #{vgaName,jdbcType=VARCHAR},
+      </if>
+      <if test="vgaPrice != null" >
+        #{vgaPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="vgaHref != null" >
+        #{vgaHref,jdbcType=VARCHAR},
+      </if>
+      <if test="vgaDescribe != null" >
+        #{vgaDescribe,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="group.computerAssembly.entity.Vga" >
+    update vga
+    <set >
+      <if test="vgaName != null" >
+        vga_name = #{vgaName,jdbcType=VARCHAR},
+      </if>
+      <if test="vgaPrice != null" >
+        vga_price = #{vgaPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="vgaHref != null" >
+        vga_href = #{vgaHref,jdbcType=VARCHAR},
+      </if>
+      <if test="vgaDescribe != null" >
+        vga_describe = #{vgaDescribe,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where vga_id = #{vgaId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="group.computerAssembly.entity.Vga" >
+    update vga
+    set vga_name = #{vgaName,jdbcType=VARCHAR},
+      vga_price = #{vgaPrice,jdbcType=VARCHAR},
+      vga_href = #{vgaHref,jdbcType=VARCHAR},
+      vga_describe = #{vgaDescribe,jdbcType=LONGVARCHAR}
+    where vga_id = #{vgaId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="group.computerAssembly.entity.Vga" >
+    update vga
+    set vga_name = #{vgaName,jdbcType=VARCHAR},
+      vga_price = #{vgaPrice,jdbcType=VARCHAR},
+      vga_href = #{vgaHref,jdbcType=VARCHAR}
+    where vga_id = #{vgaId,jdbcType=INTEGER}
+  </update>
+</mapper>
