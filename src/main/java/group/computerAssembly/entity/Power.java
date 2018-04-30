@@ -7,16 +7,16 @@ public class Power {
 
     private String powerPrice;
 
-    private String powerHref;
-
     private String powerDescribe;
 
-    public Power(Integer powerId, String powerName, String powerPrice, String powerHref, String powerDescribe) {
+    private String powerHref;
+
+    public Power(Integer powerId, String powerName, String powerPrice, String powerDescribe, String powerHref) {
         this.powerId = powerId;
         this.powerName = powerName;
         this.powerPrice = powerPrice;
-        this.powerHref = powerHref;
         this.powerDescribe = powerDescribe;
+        this.powerHref = powerHref;
     }
 
     public Power() {
@@ -47,19 +47,19 @@ public class Power {
         this.powerPrice = powerPrice == null ? null : powerPrice.trim();
     }
 
-    public String getPowerHref() {
-        return powerHref;
-    }
-
-    public void setPowerHref(String powerHref) {
-        this.powerHref = powerHref == null ? null : powerHref.trim();
-    }
-
     public String getPowerDescribe() {
         return powerDescribe;
     }
 
     public void setPowerDescribe(String powerDescribe) {
         this.powerDescribe = powerDescribe == null ? null : powerDescribe.trim();
+    }
+
+    public String getPowerHref() {
+        return powerHref;
+    }
+
+    public void setPowerHref(String powerHref) {
+        this.powerHref = powerHref == null ? null : powerHref.trim();
     }
 }

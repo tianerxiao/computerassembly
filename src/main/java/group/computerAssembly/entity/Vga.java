@@ -7,16 +7,16 @@ public class Vga {
 
     private String vgaPrice;
 
-    private String vgaHref;
-
     private String vgaDescribe;
 
-    public Vga(Integer vgaId, String vgaName, String vgaPrice, String vgaHref, String vgaDescribe) {
+    private String vgaHref;
+
+    public Vga(Integer vgaId, String vgaName, String vgaPrice, String vgaDescribe, String vgaHref) {
         this.vgaId = vgaId;
         this.vgaName = vgaName;
         this.vgaPrice = vgaPrice;
-        this.vgaHref = vgaHref;
         this.vgaDescribe = vgaDescribe;
+        this.vgaHref = vgaHref;
     }
 
     public Vga() {
@@ -47,19 +47,19 @@ public class Vga {
         this.vgaPrice = vgaPrice == null ? null : vgaPrice.trim();
     }
 
-    public String getVgaHref() {
-        return vgaHref;
-    }
-
-    public void setVgaHref(String vgaHref) {
-        this.vgaHref = vgaHref == null ? null : vgaHref.trim();
-    }
-
     public String getVgaDescribe() {
         return vgaDescribe;
     }
 
     public void setVgaDescribe(String vgaDescribe) {
         this.vgaDescribe = vgaDescribe == null ? null : vgaDescribe.trim();
+    }
+
+    public String getVgaHref() {
+        return vgaHref;
+    }
+
+    public void setVgaHref(String vgaHref) {
+        this.vgaHref = vgaHref == null ? null : vgaHref.trim();
     }
 }

@@ -7,16 +7,16 @@ public class Memory {
 
     private String memPrice;
 
-    private String memHref;
-
     private String memDescribe;
 
-    public Memory(Integer memId, String memName, String memPrice, String memHref, String memDescribe) {
+    private String memHref;
+
+    public Memory(Integer memId, String memName, String memPrice, String memDescribe, String memHref) {
         this.memId = memId;
         this.memName = memName;
         this.memPrice = memPrice;
-        this.memHref = memHref;
         this.memDescribe = memDescribe;
+        this.memHref = memHref;
     }
 
     public Memory() {
@@ -47,19 +47,19 @@ public class Memory {
         this.memPrice = memPrice == null ? null : memPrice.trim();
     }
 
-    public String getMemHref() {
-        return memHref;
-    }
-
-    public void setMemHref(String memHref) {
-        this.memHref = memHref == null ? null : memHref.trim();
-    }
-
     public String getMemDescribe() {
         return memDescribe;
     }
 
     public void setMemDescribe(String memDescribe) {
         this.memDescribe = memDescribe == null ? null : memDescribe.trim();
+    }
+
+    public String getMemHref() {
+        return memHref;
+    }
+
+    public void setMemHref(String memHref) {
+        this.memHref = memHref == null ? null : memHref.trim();
     }
 }

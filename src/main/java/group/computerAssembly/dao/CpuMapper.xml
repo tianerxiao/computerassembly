@@ -6,16 +6,8 @@
       <idArg column="cpu_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="cpu_name" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="cpu_price" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="cpu_describe" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="cpu_href" jdbcType="VARCHAR" javaType="java.lang.String" />
-    </constructor>
-  </resultMap>
-  <resultMap id="ResultMapWithBLOBs" type="group.computerAssembly.entity.Cpu" >
-    <constructor >
-      <idArg column="cpu_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="cpu_name" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="cpu_price" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="cpu_href" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="cpu_describe" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
     </constructor>
   </resultMap>
   <sql id="Example_Where_Clause" >
@@ -48,28 +40,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    cpu_id, cpu_name, cpu_price, cpu_href
+    cpu_id, cpu_name, cpu_price, cpu_describe, cpu_href
   </sql>
-  <sql id="Blob_Column_List" >
-    cpu_describe
-  </sql>
-  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="group.computerAssembly.entity.CpuExample" >
-    select
-    <if test="distinct" >
-      distinct
-    </if>
-    'true' as QUERYID,
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from cpu
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null" >
-      order by ${orderByClause}
-    </if>
-  </select>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="group.computerAssembly.entity.CpuExample" >
     select
     <if test="distinct" >
@@ -85,11 +57,9 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
     from cpu
     where cpu_id = #{cpuId,jdbcType=INTEGER}
   </select>
@@ -99,9 +69,9 @@
   </delete>
   <insert id="insert" parameterType="group.computerAssembly.entity.Cpu" >
     insert into cpu (cpu_id, cpu_name, cpu_price, 
-      cpu_href, cpu_describe)
+      cpu_describe, cpu_href)
     values (#{cpuId,jdbcType=INTEGER}, #{cpuName,jdbcType=VARCHAR}, #{cpuPrice,jdbcType=VARCHAR}, 
-      #{cpuHref,jdbcType=VARCHAR}, #{cpuDescribe,jdbcType=LONGVARCHAR})
+      #{cpuDescribe,jdbcType=VARCHAR}, #{cpuHref,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="group.computerAssembly.entity.Cpu" >
     insert into cpu
@@ -115,11 +85,11 @@
       <if test="cpuPrice != null" >
         cpu_price,
       </if>
-      <if test="cpuHref != null" >
-        cpu_href,
-      </if>
       <if test="cpuDescribe != null" >
         cpu_describe,
+      </if>
+      <if test="cpuHref != null" >
+        cpu_href,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -132,11 +102,11 @@
       <if test="cpuPrice != null" >
         #{cpuPrice,jdbcType=VARCHAR},
       </if>
+      <if test="cpuDescribe != null" >
+        #{cpuDescribe,jdbcType=VARCHAR},
+      </if>
       <if test="cpuHref != null" >
         #{cpuHref,jdbcType=VARCHAR},
-      </if>
-      <if test="cpuDescribe != null" >
-        #{cpuDescribe,jdbcType=LONGVARCHAR},
       </if>
     </trim>
   </insert>
@@ -149,27 +119,20 @@
       <if test="cpuPrice != null" >
         cpu_price = #{cpuPrice,jdbcType=VARCHAR},
       </if>
+      <if test="cpuDescribe != null" >
+        cpu_describe = #{cpuDescribe,jdbcType=VARCHAR},
+      </if>
       <if test="cpuHref != null" >
         cpu_href = #{cpuHref,jdbcType=VARCHAR},
       </if>
-      <if test="cpuDescribe != null" >
-        cpu_describe = #{cpuDescribe,jdbcType=LONGVARCHAR},
-      </if>
     </set>
-    where cpu_id = #{cpuId,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="group.computerAssembly.entity.Cpu" >
-    update cpu
-    set cpu_name = #{cpuName,jdbcType=VARCHAR},
-      cpu_price = #{cpuPrice,jdbcType=VARCHAR},
-      cpu_href = #{cpuHref,jdbcType=VARCHAR},
-      cpu_describe = #{cpuDescribe,jdbcType=LONGVARCHAR}
     where cpu_id = #{cpuId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="group.computerAssembly.entity.Cpu" >
     update cpu
     set cpu_name = #{cpuName,jdbcType=VARCHAR},
       cpu_price = #{cpuPrice,jdbcType=VARCHAR},
+      cpu_describe = #{cpuDescribe,jdbcType=VARCHAR},
       cpu_href = #{cpuHref,jdbcType=VARCHAR}
     where cpu_id = #{cpuId,jdbcType=INTEGER}
   </update>

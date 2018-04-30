@@ -11,15 +11,11 @@ public interface CpuMapper {
 
     int insertSelective(Cpu record);
 
-    List<Cpu> selectByExampleWithBLOBs(CpuExample example);
-
     List<Cpu> selectByExample(CpuExample example);
 
     Cpu selectByPrimaryKey(Integer cpuId);
 
     int updateByPrimaryKeySelective(Cpu record);
-
-    int updateByPrimaryKeyWithBLOBs(Cpu record);
 
     int updateByPrimaryKey(Cpu record);
 }

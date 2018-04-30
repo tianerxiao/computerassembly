@@ -7,16 +7,16 @@ public class Board {
 
     private String boardPrice;
 
-    private String boardHref;
-
     private String boardDescribe;
 
-    public Board(Integer boardId, String boardName, String boardPrice, String boardHref, String boardDescribe) {
+    private String boardHref;
+
+    public Board(Integer boardId, String boardName, String boardPrice, String boardDescribe, String boardHref) {
         this.boardId = boardId;
         this.boardName = boardName;
         this.boardPrice = boardPrice;
-        this.boardHref = boardHref;
         this.boardDescribe = boardDescribe;
+        this.boardHref = boardHref;
     }
 
     public Board() {
@@ -47,19 +47,19 @@ public class Board {
         this.boardPrice = boardPrice == null ? null : boardPrice.trim();
     }
 
-    public String getBoardHref() {
-        return boardHref;
-    }
-
-    public void setBoardHref(String boardHref) {
-        this.boardHref = boardHref == null ? null : boardHref.trim();
-    }
-
     public String getBoardDescribe() {
         return boardDescribe;
     }
 
     public void setBoardDescribe(String boardDescribe) {
         this.boardDescribe = boardDescribe == null ? null : boardDescribe.trim();
+    }
+
+    public String getBoardHref() {
+        return boardHref;
+    }
+
+    public void setBoardHref(String boardHref) {
+        this.boardHref = boardHref == null ? null : boardHref.trim();
     }
 }

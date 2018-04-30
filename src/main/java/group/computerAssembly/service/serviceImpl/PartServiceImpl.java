@@ -4,6 +4,7 @@ import group.computerAssembly.dao.*;
 import group.computerAssembly.dto.*;
 import group.computerAssembly.entity.*;
 import group.computerAssembly.service.PartService;
+import org.springframework.beans.BeanWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -263,5 +264,65 @@ public class PartServiceImpl implements PartService{
             powerDtoList.add(powerDto);
         }
         return powerDtoList;
+    }
+
+    @Override
+    public List<Cpu> searchCpuPartLike(String searchContent) {
+          CpuExample cpuExample = new CpuExample();
+          CpuExample.Criteria criteria = cpuExample.createCriteria();
+          CpuExample.Criteria criteria1 = cpuExample.createCriteria();
+          criteria.andCpuNameLike("%"+searchContent+"%");
+          criteria1.andCpuDescribeLike("%"+searchContent+"%");
+          cpuExample.or(criteria1);
+          List<Cpu> cpuList = cpuMapper.selectByExample(cpuExample);
+          return cpuList;
+    }
+
+    @Override
+    public  List<Memory> searchMemoryPartLike(String searchContent){
+          MemoryExample memoryExample = new MemoryExample();
+          MemoryExample.Criteria criteria = memoryExample.createCriteria();
+          MemoryExample.Criteria criteria1 = memoryExample.createCriteria();
+          criteria1.andMemDescribeLike("%"+searchContent+"%");
+          criteria.andMemNameLike("%"+searchContent+"%");
+          memoryExample.or(criteria1);
+          List<Memory> memoryList = memoryMapper.selectByExample(memoryExample);
+          return memoryList;
+    }
+
+    @Override
+    public List<Board> searchBoardPartLike(String searchContent){
+        BoardExample boardExample = new BoardExample();
+        BoardExample.Criteria criteria = boardExample.createCriteria();
+        BoardExample.Criteria criteria1 = boardExample.createCriteria();
+        criteria.andBoardNameLike("%"+searchContent+"%");
+        criteria1.andBoardDescribeLike("%"+searchContent+"%");
+        boardExample.or(criteria1);
+        List<Board> boardList = boardMapper.selectByExample(boardExample);
+        return boardList;
+    }
+
+    @Override
+    public List<Power> searchPowerPartLike(String searchContent){
+        PowerExample powerExample = new PowerExample();
+        PowerExample.Criteria criteria = powerExample.createCriteria();
+        PowerExample.Criteria criteria1 = powerExample.createCriteria();
+        criteria1.andPowerDescribeLike("%"+searchContent+"%");
+        criteria.andPowerNameLike("%"+searchContent+"%");
+        powerExample.or(criteria1);
+        List<Power> powerList = powerMapper.selectByExample(powerExample);
+        return powerList;
+    }
+
+    @Override
+    public List<Vga> searchVgaPartLike(String searchContent){
+        VgaExample vgaExample = new VgaExample();
+        VgaExample.Criteria criteria = vgaExample.createCriteria();
+        VgaExample.Criteria criteria1 = vgaExample.createCriteria();
+        criteria1.andVgaDescribeLike("%"+searchContent+"%");
+        criteria.andVgaNameLike("%"+searchContent+"%");
+        vgaExample.or(criteria1);
+        List<Vga> vgaList = vgaMapper.selectByExample(vgaExample);
+        return vgaList;
     }
 }

@@ -304,6 +304,76 @@ public class BoardExample {
             return (Criteria) this;
         }
 
+        public Criteria andBoardDescribeIsNull() {
+            addCriterion("board_describe is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBoardDescribeIsNotNull() {
+            addCriterion("board_describe is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBoardDescribeEqualTo(String value) {
+            addCriterion("board_describe =", value, "boardDescribe");
+            return (Criteria) this;
+        }
+
+        public Criteria andBoardDescribeNotEqualTo(String value) {
+            addCriterion("board_describe <>", value, "boardDescribe");
+            return (Criteria) this;
+        }
+
+        public Criteria andBoardDescribeGreaterThan(String value) {
+            addCriterion("board_describe >", value, "boardDescribe");
+            return (Criteria) this;
+        }
+
+        public Criteria andBoardDescribeGreaterThanOrEqualTo(String value) {
+            addCriterion("board_describe >=", value, "boardDescribe");
+            return (Criteria) this;
+        }
+
+        public Criteria andBoardDescribeLessThan(String value) {
+            addCriterion("board_describe <", value, "boardDescribe");
+            return (Criteria) this;
+        }
+
+        public Criteria andBoardDescribeLessThanOrEqualTo(String value) {
+            addCriterion("board_describe <=", value, "boardDescribe");
+            return (Criteria) this;
+        }
+
+        public Criteria andBoardDescribeLike(String value) {
+            addCriterion("board_describe like", value, "boardDescribe");
+            return (Criteria) this;
+        }
+
+        public Criteria andBoardDescribeNotLike(String value) {
+            addCriterion("board_describe not like", value, "boardDescribe");
+            return (Criteria) this;
+        }
+
+        public Criteria andBoardDescribeIn(List<String> values) {
+            addCriterion("board_describe in", values, "boardDescribe");
+            return (Criteria) this;
+        }
+
+        public Criteria andBoardDescribeNotIn(List<String> values) {
+            addCriterion("board_describe not in", values, "boardDescribe");
+            return (Criteria) this;
+        }
+
+        public Criteria andBoardDescribeBetween(String value1, String value2) {
+            addCriterion("board_describe between", value1, value2, "boardDescribe");
+            return (Criteria) this;
+        }
+
+        public Criteria andBoardDescribeNotBetween(String value1, String value2) {
+            addCriterion("board_describe not between", value1, value2, "boardDescribe");
+            return (Criteria) this;
+        }
+
         public Criteria andBoardHrefIsNull() {
             addCriterion("board_href is null");
             return (Criteria) this;

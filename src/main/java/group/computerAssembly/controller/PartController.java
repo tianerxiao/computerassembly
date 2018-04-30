@@ -1,5 +1,7 @@
 package group.computerAssembly.controller;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import group.computerAssembly.dto.*;
 import group.computerAssembly.entity.*;
 import group.computerAssembly.enums.MessageCode;
@@ -8,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/part")
@@ -81,4 +84,37 @@ public class PartController {
         return message;
     }
 
+    @PostMapping("/search-part")
+    public @ResponseBody
+    Message searchPart(@RequestBody SearchContent searchContent){
+        Message message = new Message();
+        if("CPU".equals(searchContent.getPart().toUpperCase())){
+            message.setCode(MessageCode.ok);
+            message.setData(partService.searchCpuPartLike(searchContent.getSearchContent()));
+            return message;
+        }
+        if ("内存".equals(searchContent.getPart().toUpperCase())){
+            message.setCode(MessageCode.ok);
+            message.setData(partService.searchMemoryPartLike(searchContent.getSearchContent()));
+            return message;
+        }
+        if ("显卡".equals(searchContent.getPart().toUpperCase())){
+            message.setCode(MessageCode.ok);
+            message.setData(partService.searchVgaPartLike(searchContent.getSearchContent()));
+            return message;
+        }
+        if ("主板".equals(searchContent.getPart().toUpperCase())){
+            message.setData(partService.searchBoardPartLike(searchContent.getSearchContent()));
+            message.setCode(MessageCode.ok);
+            return message;
+        }
+        if ("电源".equals(searchContent.getPart().toUpperCase())){
+            message.setCode(MessageCode.ok);
+            message.setData(partService.searchPowerPartLike(searchContent.getSearchContent()));
+            return message;
+        }
+        message.setCode(MessageCode.nofound);
+        message.setData("");
+        return message;
+    }
 }

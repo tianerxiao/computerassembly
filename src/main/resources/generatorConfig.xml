@@ -72,9 +72,10 @@
                <!--enableCountByExample="false" enableUpdateByExample="false"-->
                <!--enableDeleteByExample="false" enableSelectByExample="true"-->
                <!--selectByExampleQueryId="true">-->
+            <!--<columnOverride column="board_describe" javaType="java.lang.String" jdbcType="VARCHAR" />-->
         <!--</table>-->
         <!--<table tableName="computer_part" domainObjectName="ComputerPart"-->
-               <!--enableCountByExample="false" enableUpdateByExample="false"-->
+               <!--enableCountByExample="false" enableUpdateByExample="true"-->
                <!--enableDeleteByExample="false" enableSelectByExample="true"-->
                <!--selectByExampleQueryId="true">-->
         <!--</table>-->
@@ -82,6 +83,7 @@
                <!--enableCountByExample="false" enableUpdateByExample="false"-->
                <!--enableDeleteByExample="false" enableSelectByExample="true"-->
                <!--selectByExampleQueryId="true">-->
+            <!--<columnOverride column="cpu_describe" javaType="java.lang.String" jdbcType="VARCHAR" />-->
         <!--</table>-->
         <!--<table tableName="cpu_detail" domainObjectName="CpuDetail"-->
                <!--enableCountByExample="false" enableUpdateByExample="false"-->
@@ -92,11 +94,13 @@
                <!--enableCountByExample="false" enableUpdateByExample="false"-->
                <!--enableDeleteByExample="false" enableSelectByExample="true"-->
                <!--selectByExampleQueryId="true">-->
+            <!--<columnOverride column="mem_describe" javaType="java.lang.String" jdbcType="VARCHAR" />-->
         <!--</table>-->
         <!--<table tableName="power" domainObjectName="Power"-->
                <!--enableCountByExample="false" enableUpdateByExample="false"-->
                <!--enableDeleteByExample="false" enableSelectByExample="true"-->
                <!--selectByExampleQueryId="true">-->
+            <!--<columnOverride column="power_describe" javaType="java.lang.String" jdbcType="VARCHAR" />-->
         <!--</table>-->
         <!--<table tableName="role" domainObjectName="Role"-->
                <!--enableCountByExample="false" enableUpdateByExample="false"-->
@@ -122,6 +126,7 @@
                <!--enableCountByExample="false" enableUpdateByExample="false"-->
                <!--enableDeleteByExample="false" enableSelectByExample="true"-->
                <!--selectByExampleQueryId="true">-->
+            <!--<columnOverride column="vga_describe" javaType="java.lang.String" jdbcType="VARCHAR" />-->
         <!--</table>-->
         <!--<table tableName="vga_detail" domainObjectName="VgaDetail"-->
                <!--enableCountByExample="false" enableUpdateByExample="false"-->

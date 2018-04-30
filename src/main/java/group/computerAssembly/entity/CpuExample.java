@@ -304,6 +304,76 @@ public class CpuExample {
             return (Criteria) this;
         }
 
+        public Criteria andCpuDescribeIsNull() {
+            addCriterion("cpu_describe is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCpuDescribeIsNotNull() {
+            addCriterion("cpu_describe is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCpuDescribeEqualTo(String value) {
+            addCriterion("cpu_describe =", value, "cpuDescribe");
+            return (Criteria) this;
+        }
+
+        public Criteria andCpuDescribeNotEqualTo(String value) {
+            addCriterion("cpu_describe <>", value, "cpuDescribe");
+            return (Criteria) this;
+        }
+
+        public Criteria andCpuDescribeGreaterThan(String value) {
+            addCriterion("cpu_describe >", value, "cpuDescribe");
+            return (Criteria) this;
+        }
+
+        public Criteria andCpuDescribeGreaterThanOrEqualTo(String value) {
+            addCriterion("cpu_describe >=", value, "cpuDescribe");
+            return (Criteria) this;
+        }
+
+        public Criteria andCpuDescribeLessThan(String value) {
+            addCriterion("cpu_describe <", value, "cpuDescribe");
+            return (Criteria) this;
+        }
+
+        public Criteria andCpuDescribeLessThanOrEqualTo(String value) {
+            addCriterion("cpu_describe <=", value, "cpuDescribe");
+            return (Criteria) this;
+        }
+
+        public Criteria andCpuDescribeLike(String value) {
+            addCriterion("cpu_describe like", value, "cpuDescribe");
+            return (Criteria) this;
+        }
+
+        public Criteria andCpuDescribeNotLike(String value) {
+            addCriterion("cpu_describe not like", value, "cpuDescribe");
+            return (Criteria) this;
+        }
+
+        public Criteria andCpuDescribeIn(List<String> values) {
+            addCriterion("cpu_describe in", values, "cpuDescribe");
+            return (Criteria) this;
+        }
+
+        public Criteria andCpuDescribeNotIn(List<String> values) {
+            addCriterion("cpu_describe not in", values, "cpuDescribe");
+            return (Criteria) this;
+        }
+
+        public Criteria andCpuDescribeBetween(String value1, String value2) {
+            addCriterion("cpu_describe between", value1, value2, "cpuDescribe");
+            return (Criteria) this;
+        }
+
+        public Criteria andCpuDescribeNotBetween(String value1, String value2) {
+            addCriterion("cpu_describe not between", value1, value2, "cpuDescribe");
+            return (Criteria) this;
+        }
+
         public Criteria andCpuHrefIsNull() {
             addCriterion("cpu_href is null");
             return (Criteria) this;

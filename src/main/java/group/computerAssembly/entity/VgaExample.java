@@ -304,6 +304,76 @@ public class VgaExample {
             return (Criteria) this;
         }
 
+        public Criteria andVgaDescribeIsNull() {
+            addCriterion("vga_describe is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andVgaDescribeIsNotNull() {
+            addCriterion("vga_describe is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andVgaDescribeEqualTo(String value) {
+            addCriterion("vga_describe =", value, "vgaDescribe");
+            return (Criteria) this;
+        }
+
+        public Criteria andVgaDescribeNotEqualTo(String value) {
+            addCriterion("vga_describe <>", value, "vgaDescribe");
+            return (Criteria) this;
+        }
+
+        public Criteria andVgaDescribeGreaterThan(String value) {
+            addCriterion("vga_describe >", value, "vgaDescribe");
+            return (Criteria) this;
+        }
+
+        public Criteria andVgaDescribeGreaterThanOrEqualTo(String value) {
+            addCriterion("vga_describe >=", value, "vgaDescribe");
+            return (Criteria) this;
+        }
+
+        public Criteria andVgaDescribeLessThan(String value) {
+            addCriterion("vga_describe <", value, "vgaDescribe");
+            return (Criteria) this;
+        }
+
+        public Criteria andVgaDescribeLessThanOrEqualTo(String value) {
+            addCriterion("vga_describe <=", value, "vgaDescribe");
+            return (Criteria) this;
+        }
+
+        public Criteria andVgaDescribeLike(String value) {
+            addCriterion("vga_describe like", value, "vgaDescribe");
+            return (Criteria) this;
+        }
+
+        public Criteria andVgaDescribeNotLike(String value) {
+            addCriterion("vga_describe not like", value, "vgaDescribe");
+            return (Criteria) this;
+        }
+
+        public Criteria andVgaDescribeIn(List<String> values) {
+            addCriterion("vga_describe in", values, "vgaDescribe");
+            return (Criteria) this;
+        }
+
+        public Criteria andVgaDescribeNotIn(List<String> values) {
+            addCriterion("vga_describe not in", values, "vgaDescribe");
+            return (Criteria) this;
+        }
+
+        public Criteria andVgaDescribeBetween(String value1, String value2) {
+            addCriterion("vga_describe between", value1, value2, "vgaDescribe");
+            return (Criteria) this;
+        }
+
+        public Criteria andVgaDescribeNotBetween(String value1, String value2) {
+            addCriterion("vga_describe not between", value1, value2, "vgaDescribe");
+            return (Criteria) this;
+        }
+
         public Criteria andVgaHrefIsNull() {
             addCriterion("vga_href is null");
             return (Criteria) this;

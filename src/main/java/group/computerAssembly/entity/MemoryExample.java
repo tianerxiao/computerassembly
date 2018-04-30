@@ -304,6 +304,76 @@ public class MemoryExample {
             return (Criteria) this;
         }
 
+        public Criteria andMemDescribeIsNull() {
+            addCriterion("mem_describe is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMemDescribeIsNotNull() {
+            addCriterion("mem_describe is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMemDescribeEqualTo(String value) {
+            addCriterion("mem_describe =", value, "memDescribe");
+            return (Criteria) this;
+        }
+
+        public Criteria andMemDescribeNotEqualTo(String value) {
+            addCriterion("mem_describe <>", value, "memDescribe");
+            return (Criteria) this;
+        }
+
+        public Criteria andMemDescribeGreaterThan(String value) {
+            addCriterion("mem_describe >", value, "memDescribe");
+            return (Criteria) this;
+        }
+
+        public Criteria andMemDescribeGreaterThanOrEqualTo(String value) {
+            addCriterion("mem_describe >=", value, "memDescribe");
+            return (Criteria) this;
+        }
+
+        public Criteria andMemDescribeLessThan(String value) {
+            addCriterion("mem_describe <", value, "memDescribe");
+            return (Criteria) this;
+        }
+
+        public Criteria andMemDescribeLessThanOrEqualTo(String value) {
+            addCriterion("mem_describe <=", value, "memDescribe");
+            return (Criteria) this;
+        }
+
+        public Criteria andMemDescribeLike(String value) {
+            addCriterion("mem_describe like", value, "memDescribe");
+            return (Criteria) this;
+        }
+
+        public Criteria andMemDescribeNotLike(String value) {
+            addCriterion("mem_describe not like", value, "memDescribe");
+            return (Criteria) this;
+        }
+
+        public Criteria andMemDescribeIn(List<String> values) {
+            addCriterion("mem_describe in", values, "memDescribe");
+            return (Criteria) this;
+        }
+
+        public Criteria andMemDescribeNotIn(List<String> values) {
+            addCriterion("mem_describe not in", values, "memDescribe");
+            return (Criteria) this;
+        }
+
+        public Criteria andMemDescribeBetween(String value1, String value2) {
+            addCriterion("mem_describe between", value1, value2, "memDescribe");
+            return (Criteria) this;
+        }
+
+        public Criteria andMemDescribeNotBetween(String value1, String value2) {
+            addCriterion("mem_describe not between", value1, value2, "memDescribe");
+            return (Criteria) this;
+        }
+
         public Criteria andMemHrefIsNull() {
             addCriterion("mem_href is null");
             return (Criteria) this;

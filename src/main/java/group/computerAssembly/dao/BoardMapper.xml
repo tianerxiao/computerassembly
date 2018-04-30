@@ -6,16 +6,8 @@
       <idArg column="board_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="board_name" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="board_price" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="board_describe" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="board_href" jdbcType="VARCHAR" javaType="java.lang.String" />
-    </constructor>
-  </resultMap>
-  <resultMap id="ResultMapWithBLOBs" type="group.computerAssembly.entity.Board" >
-    <constructor >
-      <idArg column="board_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="board_name" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="board_price" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="board_href" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="board_describe" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
     </constructor>
   </resultMap>
   <sql id="Example_Where_Clause" >
@@ -48,28 +40,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    board_id, board_name, board_price, board_href
+    board_id, board_name, board_price, board_describe, board_href
   </sql>
-  <sql id="Blob_Column_List" >
-    board_describe
-  </sql>
-  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="group.computerAssembly.entity.BoardExample" >
-    select
-    <if test="distinct" >
-      distinct
-    </if>
-    'true' as QUERYID,
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from board
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null" >
-      order by ${orderByClause}
-    </if>
-  </select>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="group.computerAssembly.entity.BoardExample" >
     select
     <if test="distinct" >
@@ -85,11 +57,9 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
     from board
     where board_id = #{boardId,jdbcType=INTEGER}
   </select>
@@ -99,9 +69,9 @@
   </delete>
   <insert id="insert" parameterType="group.computerAssembly.entity.Board" >
     insert into board (board_id, board_name, board_price, 
-      board_href, board_describe)
+      board_describe, board_href)
     values (#{boardId,jdbcType=INTEGER}, #{boardName,jdbcType=VARCHAR}, #{boardPrice,jdbcType=VARCHAR}, 
-      #{boardHref,jdbcType=VARCHAR}, #{boardDescribe,jdbcType=LONGVARCHAR})
+      #{boardDescribe,jdbcType=VARCHAR}, #{boardHref,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="group.computerAssembly.entity.Board" >
     insert into board
@@ -115,11 +85,11 @@
       <if test="boardPrice != null" >
         board_price,
       </if>
-      <if test="boardHref != null" >
-        board_href,
-      </if>
       <if test="boardDescribe != null" >
         board_describe,
+      </if>
+      <if test="boardHref != null" >
+        board_href,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -132,11 +102,11 @@
       <if test="boardPrice != null" >
         #{boardPrice,jdbcType=VARCHAR},
       </if>
+      <if test="boardDescribe != null" >
+        #{boardDescribe,jdbcType=VARCHAR},
+      </if>
       <if test="boardHref != null" >
         #{boardHref,jdbcType=VARCHAR},
-      </if>
-      <if test="boardDescribe != null" >
-        #{boardDescribe,jdbcType=LONGVARCHAR},
       </if>
     </trim>
   </insert>
@@ -149,27 +119,20 @@
       <if test="boardPrice != null" >
         board_price = #{boardPrice,jdbcType=VARCHAR},
       </if>
+      <if test="boardDescribe != null" >
+        board_describe = #{boardDescribe,jdbcType=VARCHAR},
+      </if>
       <if test="boardHref != null" >
         board_href = #{boardHref,jdbcType=VARCHAR},
       </if>
-      <if test="boardDescribe != null" >
-        board_describe = #{boardDescribe,jdbcType=LONGVARCHAR},
-      </if>
     </set>
-    where board_id = #{boardId,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="group.computerAssembly.entity.Board" >
-    update board
-    set board_name = #{boardName,jdbcType=VARCHAR},
-      board_price = #{boardPrice,jdbcType=VARCHAR},
-      board_href = #{boardHref,jdbcType=VARCHAR},
-      board_describe = #{boardDescribe,jdbcType=LONGVARCHAR}
     where board_id = #{boardId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="group.computerAssembly.entity.Board" >
     update board
     set board_name = #{boardName,jdbcType=VARCHAR},
       board_price = #{boardPrice,jdbcType=VARCHAR},
+      board_describe = #{boardDescribe,jdbcType=VARCHAR},
       board_href = #{boardHref,jdbcType=VARCHAR}
     where board_id = #{boardId,jdbcType=INTEGER}
   </update>

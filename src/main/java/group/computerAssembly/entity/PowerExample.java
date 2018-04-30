@@ -304,6 +304,76 @@ public class PowerExample {
             return (Criteria) this;
         }
 
+        public Criteria andPowerDescribeIsNull() {
+            addCriterion("power_describe is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPowerDescribeIsNotNull() {
+            addCriterion("power_describe is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPowerDescribeEqualTo(String value) {
+            addCriterion("power_describe =", value, "powerDescribe");
+            return (Criteria) this;
+        }
+
+        public Criteria andPowerDescribeNotEqualTo(String value) {
+            addCriterion("power_describe <>", value, "powerDescribe");
+            return (Criteria) this;
+        }
+
+        public Criteria andPowerDescribeGreaterThan(String value) {
+            addCriterion("power_describe >", value, "powerDescribe");
+            return (Criteria) this;
+        }
+
+        public Criteria andPowerDescribeGreaterThanOrEqualTo(String value) {
+            addCriterion("power_describe >=", value, "powerDescribe");
+            return (Criteria) this;
+        }
+
+        public Criteria andPowerDescribeLessThan(String value) {
+            addCriterion("power_describe <", value, "powerDescribe");
+            return (Criteria) this;
+        }
+
+        public Criteria andPowerDescribeLessThanOrEqualTo(String value) {
+            addCriterion("power_describe <=", value, "powerDescribe");
+            return (Criteria) this;
+        }
+
+        public Criteria andPowerDescribeLike(String value) {
+            addCriterion("power_describe like", value, "powerDescribe");
+            return (Criteria) this;
+        }
+
+        public Criteria andPowerDescribeNotLike(String value) {
+            addCriterion("power_describe not like", value, "powerDescribe");
+            return (Criteria) this;
+        }
+
+        public Criteria andPowerDescribeIn(List<String> values) {
+            addCriterion("power_describe in", values, "powerDescribe");
+            return (Criteria) this;
+        }
+
+        public Criteria andPowerDescribeNotIn(List<String> values) {
+            addCriterion("power_describe not in", values, "powerDescribe");
+            return (Criteria) this;
+        }
+
+        public Criteria andPowerDescribeBetween(String value1, String value2) {
+            addCriterion("power_describe between", value1, value2, "powerDescribe");
+            return (Criteria) this;
+        }
+
+        public Criteria andPowerDescribeNotBetween(String value1, String value2) {
+            addCriterion("power_describe not between", value1, value2, "powerDescribe");
+            return (Criteria) this;
+        }
+
         public Criteria andPowerHrefIsNull() {
             addCriterion("power_href is null");
             return (Criteria) this;

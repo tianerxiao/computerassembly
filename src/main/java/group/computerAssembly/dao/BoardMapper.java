@@ -11,15 +11,11 @@ public interface BoardMapper {
 
     int insertSelective(Board record);
 
-    List<Board> selectByExampleWithBLOBs(BoardExample example);
-
     List<Board> selectByExample(BoardExample example);
 
     Board selectByPrimaryKey(Integer boardId);
 
     int updateByPrimaryKeySelective(Board record);
-
-    int updateByPrimaryKeyWithBLOBs(Board record);
 
     int updateByPrimaryKey(Board record);
 }

@@ -6,16 +6,8 @@
       <idArg column="mem_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="mem_name" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="mem_price" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="mem_describe" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="mem_href" jdbcType="VARCHAR" javaType="java.lang.String" />
-    </constructor>
-  </resultMap>
-  <resultMap id="ResultMapWithBLOBs" type="group.computerAssembly.entity.Memory" >
-    <constructor >
-      <idArg column="mem_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="mem_name" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="mem_price" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="mem_href" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="mem_describe" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
     </constructor>
   </resultMap>
   <sql id="Example_Where_Clause" >
@@ -48,28 +40,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    mem_id, mem_name, mem_price, mem_href
+    mem_id, mem_name, mem_price, mem_describe, mem_href
   </sql>
-  <sql id="Blob_Column_List" >
-    mem_describe
-  </sql>
-  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="group.computerAssembly.entity.MemoryExample" >
-    select
-    <if test="distinct" >
-      distinct
-    </if>
-    'true' as QUERYID,
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from memory
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null" >
-      order by ${orderByClause}
-    </if>
-  </select>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="group.computerAssembly.entity.MemoryExample" >
     select
     <if test="distinct" >
@@ -85,11 +57,9 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
     from memory
     where mem_id = #{memId,jdbcType=INTEGER}
   </select>
@@ -99,9 +69,9 @@
   </delete>
   <insert id="insert" parameterType="group.computerAssembly.entity.Memory" >
     insert into memory (mem_id, mem_name, mem_price, 
-      mem_href, mem_describe)
+      mem_describe, mem_href)
     values (#{memId,jdbcType=INTEGER}, #{memName,jdbcType=VARCHAR}, #{memPrice,jdbcType=VARCHAR}, 
-      #{memHref,jdbcType=VARCHAR}, #{memDescribe,jdbcType=LONGVARCHAR})
+      #{memDescribe,jdbcType=VARCHAR}, #{memHref,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="group.computerAssembly.entity.Memory" >
     insert into memory
@@ -115,11 +85,11 @@
       <if test="memPrice != null" >
         mem_price,
       </if>
-      <if test="memHref != null" >
-        mem_href,
-      </if>
       <if test="memDescribe != null" >
         mem_describe,
+      </if>
+      <if test="memHref != null" >
+        mem_href,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -132,11 +102,11 @@
       <if test="memPrice != null" >
         #{memPrice,jdbcType=VARCHAR},
       </if>
+      <if test="memDescribe != null" >
+        #{memDescribe,jdbcType=VARCHAR},
+      </if>
       <if test="memHref != null" >
         #{memHref,jdbcType=VARCHAR},
-      </if>
-      <if test="memDescribe != null" >
-        #{memDescribe,jdbcType=LONGVARCHAR},
       </if>
     </trim>
   </insert>
@@ -149,27 +119,20 @@
       <if test="memPrice != null" >
         mem_price = #{memPrice,jdbcType=VARCHAR},
       </if>
+      <if test="memDescribe != null" >
+        mem_describe = #{memDescribe,jdbcType=VARCHAR},
+      </if>
       <if test="memHref != null" >
         mem_href = #{memHref,jdbcType=VARCHAR},
       </if>
-      <if test="memDescribe != null" >
-        mem_describe = #{memDescribe,jdbcType=LONGVARCHAR},
-      </if>
     </set>
-    where mem_id = #{memId,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="group.computerAssembly.entity.Memory" >
-    update memory
-    set mem_name = #{memName,jdbcType=VARCHAR},
-      mem_price = #{memPrice,jdbcType=VARCHAR},
-      mem_href = #{memHref,jdbcType=VARCHAR},
-      mem_describe = #{memDescribe,jdbcType=LONGVARCHAR}
     where mem_id = #{memId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="group.computerAssembly.entity.Memory" >
     update memory
     set mem_name = #{memName,jdbcType=VARCHAR},
       mem_price = #{memPrice,jdbcType=VARCHAR},
+      mem_describe = #{memDescribe,jdbcType=VARCHAR},
       mem_href = #{memHref,jdbcType=VARCHAR}
     where mem_id = #{memId,jdbcType=INTEGER}
   </update>

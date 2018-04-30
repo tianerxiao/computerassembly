@@ -11,15 +11,11 @@ public interface MemoryMapper {
 
     int insertSelective(Memory record);
 
-    List<Memory> selectByExampleWithBLOBs(MemoryExample example);
-
     List<Memory> selectByExample(MemoryExample example);
 
     Memory selectByPrimaryKey(Integer memId);
 
     int updateByPrimaryKeySelective(Memory record);
-
-    int updateByPrimaryKeyWithBLOBs(Memory record);
 
     int updateByPrimaryKey(Memory record);
 }

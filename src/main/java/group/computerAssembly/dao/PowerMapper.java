@@ -11,15 +11,11 @@ public interface PowerMapper {
 
     int insertSelective(Power record);
 
-    List<Power> selectByExampleWithBLOBs(PowerExample example);
-
     List<Power> selectByExample(PowerExample example);
 
     Power selectByPrimaryKey(Integer powerId);
 
     int updateByPrimaryKeySelective(Power record);
-
-    int updateByPrimaryKeyWithBLOBs(Power record);
 
     int updateByPrimaryKey(Power record);
 }

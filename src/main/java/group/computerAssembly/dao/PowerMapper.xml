@@ -6,16 +6,8 @@
       <idArg column="power_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="power_name" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="power_price" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="power_describe" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="power_href" jdbcType="VARCHAR" javaType="java.lang.String" />
-    </constructor>
-  </resultMap>
-  <resultMap id="ResultMapWithBLOBs" type="group.computerAssembly.entity.Power" >
-    <constructor >
-      <idArg column="power_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="power_name" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="power_price" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="power_href" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="power_describe" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
     </constructor>
   </resultMap>
   <sql id="Example_Where_Clause" >
@@ -48,28 +40,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    power_id, power_name, power_price, power_href
+    power_id, power_name, power_price, power_describe, power_href
   </sql>
-  <sql id="Blob_Column_List" >
-    power_describe
-  </sql>
-  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="group.computerAssembly.entity.PowerExample" >
-    select
-    <if test="distinct" >
-      distinct
-    </if>
-    'true' as QUERYID,
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from power
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null" >
-      order by ${orderByClause}
-    </if>
-  </select>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="group.computerAssembly.entity.PowerExample" >
     select
     <if test="distinct" >
@@ -85,11 +57,9 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
     from power
     where power_id = #{powerId,jdbcType=INTEGER}
   </select>
@@ -99,9 +69,9 @@
   </delete>
   <insert id="insert" parameterType="group.computerAssembly.entity.Power" >
     insert into power (power_id, power_name, power_price, 
-      power_href, power_describe)
+      power_describe, power_href)
     values (#{powerId,jdbcType=INTEGER}, #{powerName,jdbcType=VARCHAR}, #{powerPrice,jdbcType=VARCHAR}, 
-      #{powerHref,jdbcType=VARCHAR}, #{powerDescribe,jdbcType=LONGVARCHAR})
+      #{powerDescribe,jdbcType=VARCHAR}, #{powerHref,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="group.computerAssembly.entity.Power" >
     insert into power
@@ -115,11 +85,11 @@
       <if test="powerPrice != null" >
         power_price,
       </if>
-      <if test="powerHref != null" >
-        power_href,
-      </if>
       <if test="powerDescribe != null" >
         power_describe,
+      </if>
+      <if test="powerHref != null" >
+        power_href,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -132,11 +102,11 @@
       <if test="powerPrice != null" >
         #{powerPrice,jdbcType=VARCHAR},
       </if>
+      <if test="powerDescribe != null" >
+        #{powerDescribe,jdbcType=VARCHAR},
+      </if>
       <if test="powerHref != null" >
         #{powerHref,jdbcType=VARCHAR},
-      </if>
-      <if test="powerDescribe != null" >
-        #{powerDescribe,jdbcType=LONGVARCHAR},
       </if>
     </trim>
   </insert>
@@ -149,27 +119,20 @@
       <if test="powerPrice != null" >
         power_price = #{powerPrice,jdbcType=VARCHAR},
       </if>
+      <if test="powerDescribe != null" >
+        power_describe = #{powerDescribe,jdbcType=VARCHAR},
+      </if>
       <if test="powerHref != null" >
         power_href = #{powerHref,jdbcType=VARCHAR},
       </if>
-      <if test="powerDescribe != null" >
-        power_describe = #{powerDescribe,jdbcType=LONGVARCHAR},
-      </if>
     </set>
-    where power_id = #{powerId,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="group.computerAssembly.entity.Power" >
-    update power
-    set power_name = #{powerName,jdbcType=VARCHAR},
-      power_price = #{powerPrice,jdbcType=VARCHAR},
-      power_href = #{powerHref,jdbcType=VARCHAR},
-      power_describe = #{powerDescribe,jdbcType=LONGVARCHAR}
     where power_id = #{powerId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="group.computerAssembly.entity.Power" >
     update power
     set power_name = #{powerName,jdbcType=VARCHAR},
       power_price = #{powerPrice,jdbcType=VARCHAR},
+      power_describe = #{powerDescribe,jdbcType=VARCHAR},
       power_href = #{powerHref,jdbcType=VARCHAR}
     where power_id = #{powerId,jdbcType=INTEGER}
   </update>

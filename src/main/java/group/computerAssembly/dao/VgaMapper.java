@@ -11,15 +11,11 @@ public interface VgaMapper {
 
     int insertSelective(Vga record);
 
-    List<Vga> selectByExampleWithBLOBs(VgaExample example);
-
     List<Vga> selectByExample(VgaExample example);
 
     Vga selectByPrimaryKey(Integer vgaId);
 
     int updateByPrimaryKeySelective(Vga record);
-
-    int updateByPrimaryKeyWithBLOBs(Vga record);
 
     int updateByPrimaryKey(Vga record);
 }

@@ -7,16 +7,16 @@ public class Cpu {
 
     private String cpuPrice;
 
-    private String cpuHref;
-
     private String cpuDescribe;
 
-    public Cpu(Integer cpuId, String cpuName, String cpuPrice, String cpuHref, String cpuDescribe) {
+    private String cpuHref;
+
+    public Cpu(Integer cpuId, String cpuName, String cpuPrice, String cpuDescribe, String cpuHref) {
         this.cpuId = cpuId;
         this.cpuName = cpuName;
         this.cpuPrice = cpuPrice;
-        this.cpuHref = cpuHref;
         this.cpuDescribe = cpuDescribe;
+        this.cpuHref = cpuHref;
     }
 
     public Cpu() {
@@ -47,19 +47,19 @@ public class Cpu {
         this.cpuPrice = cpuPrice == null ? null : cpuPrice.trim();
     }
 
-    public String getCpuHref() {
-        return cpuHref;
-    }
-
-    public void setCpuHref(String cpuHref) {
-        this.cpuHref = cpuHref == null ? null : cpuHref.trim();
-    }
-
     public String getCpuDescribe() {
         return cpuDescribe;
     }
 
     public void setCpuDescribe(String cpuDescribe) {
         this.cpuDescribe = cpuDescribe == null ? null : cpuDescribe.trim();
+    }
+
+    public String getCpuHref() {
+        return cpuHref;
+    }
+
+    public void setCpuHref(String cpuHref) {
+        this.cpuHref = cpuHref == null ? null : cpuHref.trim();
     }
 }
