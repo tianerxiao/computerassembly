@@ -1,6 +1,7 @@
 package group.computerAssembly.controller;
 
 import group.computerAssembly.dto.Message;
+import group.computerAssembly.dto.UserDto;
 import group.computerAssembly.entity.UserAccount;
 import group.computerAssembly.enums.MessageCode;
 import group.computerAssembly.service.UserService;
@@ -28,9 +29,9 @@ public class UserController {
             msg.setCode(MessageCode.nologin);
             return msg;
         }
-        msg.setData(userService.findUserById(
-                request.getSession().getAttribute("userId").toString()
-        ));
+        UserDto userDto = userService.findUserById(request.getSession().getAttribute("userId").toString());
+        userDto.getUserAccount().setUserPasswd("");
+        msg.setData(userDto);
         msg.setCode(MessageCode.ok);
         return msg;
     }
@@ -104,7 +105,9 @@ public class UserController {
             message.setData("密码不能为空");
             return message;
         }
-        UserAccount account = userService.findUserById(userAccount.getUserId());
+        UserDto userDto = userService.findUserById(userAccount.getUserId());
+        UserAccount account = userDto.getUserAccount();
+
         if(account ==null){
             try {
                 userService.addNewUser(userAccount);

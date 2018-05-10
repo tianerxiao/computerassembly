@@ -2,6 +2,7 @@ package group.computerAssembly.service.serviceImpl;
 
 import group.computerAssembly.dao.UserAccountMapper;
 import group.computerAssembly.dao.UserInfoMapper;
+import group.computerAssembly.dto.UserDto;
 import group.computerAssembly.entity.CpuDetail;
 import group.computerAssembly.entity.CpuDetailExample;
 import group.computerAssembly.entity.UserAccount;
@@ -24,8 +25,11 @@ public class UserServiceImpl implements UserService{
     UserAccountMapper userAccountMapper;
 
     @Override
-    public UserAccount findUserById(String userId) {
-        return userAccountMapper.selectByPrimaryKey(userId);
+    public UserDto findUserById(String userId) {
+        UserDto userDto = new UserDto();
+        userDto.setUserAccount(userAccountMapper.selectByPrimaryKey(userId));
+        userDto.setUserInfo(userInfoMapper.selectByPrimaryKey(userId));
+        return userDto;
     }
 
     @Override

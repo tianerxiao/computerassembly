@@ -267,31 +267,64 @@ public class PartServiceImpl implements PartService{
     }
 
     @Override
-    public List<Cpu> searchCpuPartLike(String searchContent) {
-          CpuExample cpuExample = new CpuExample();
-          CpuExample.Criteria criteria = cpuExample.createCriteria();
-          CpuExample.Criteria criteria1 = cpuExample.createCriteria();
-          criteria.andCpuNameLike("%"+searchContent+"%");
-          criteria1.andCpuDescribeLike("%"+searchContent+"%");
-          cpuExample.or(criteria1);
-          List<Cpu> cpuList = cpuMapper.selectByExample(cpuExample);
-          return cpuList;
+    public List<CpuDto> searchCpuPartLike(String searchContent,Integer start,Integer stop) {
+        List<CpuDto> cpuDtoList = new ArrayList<CpuDto>();
+        CpuExample cpuExample = new CpuExample();
+        CpuExample.Criteria criteria = cpuExample.createCriteria();
+        CpuExample.Criteria criteria1 = cpuExample.createCriteria();
+        criteria.andCpuNameLike("%"+searchContent+"%");
+        criteria1.andCpuDescribeLike("%"+searchContent+"%");
+        cpuExample.or(criteria1);
+        List<Cpu> cpuList = cpuMapper.selectByExample(cpuExample);
+
+        if(stop > cpuList.size()){
+            stop = cpuList.size();
+        }
+        for (Integer i = start; i < stop; i++) {
+            CpuDto cpuDto = new CpuDto();
+            cpuDto.setCpu(cpuList.get(i));
+            CpuDetail cpuDetail = cpuDetailMapper.selectByPrimaryKey(cpuList.get(i).getCpuId());
+            if(cpuDetail != null){
+                cpuDto.setCpuDetail(cpuDetail);
+            }else {
+                cpuDto.setCpuDetail(new CpuDetail());
+            }
+            cpuDtoList.add(cpuDto);
+        }
+        return cpuDtoList;
     }
 
     @Override
-    public  List<Memory> searchMemoryPartLike(String searchContent){
-          MemoryExample memoryExample = new MemoryExample();
-          MemoryExample.Criteria criteria = memoryExample.createCriteria();
-          MemoryExample.Criteria criteria1 = memoryExample.createCriteria();
-          criteria1.andMemDescribeLike("%"+searchContent+"%");
-          criteria.andMemNameLike("%"+searchContent+"%");
-          memoryExample.or(criteria1);
-          List<Memory> memoryList = memoryMapper.selectByExample(memoryExample);
-          return memoryList;
+    public  List<MemoryDto> searchMemoryPartLike(String searchContent,Integer start,Integer stop){
+        List<MemoryDto> memoryDtoList = new ArrayList<MemoryDto>();
+        MemoryExample memoryExample = new MemoryExample();
+        MemoryExample.Criteria criteria = memoryExample.createCriteria();
+        MemoryExample.Criteria criteria1 = memoryExample.createCriteria();
+        criteria1.andMemDescribeLike("%"+searchContent+"%");
+        criteria.andMemNameLike("%"+searchContent+"%");
+        memoryExample.or(criteria1);
+        List<Memory> memoryList = memoryMapper.selectByExample(memoryExample);
+
+        if(stop > memoryList.size()){
+            stop = memoryList.size();
+        }
+        for (Integer i = start; i < stop; i++) {
+            MemoryDto memoryDto = new MemoryDto();
+            memoryDto.setMemory(memoryList.get(i));
+            MemoryDetail memoryDetail  = memoryDetailMapper.selectByPrimaryKey(memoryList.get(i).getMemId());
+            if(memoryDetail != null){
+                memoryDto.setMemoryDetail(memoryDetail);
+            }else {
+                memoryDto.setMemoryDetail(new MemoryDetail());
+            }
+            memoryDtoList.add(memoryDto);
+        }
+        return memoryDtoList;
     }
 
     @Override
-    public List<Board> searchBoardPartLike(String searchContent){
+    public List<BoardDto> searchBoardPartLike(String searchContent,Integer start,Integer stop){
+        List<BoardDto> boardDtoList = new ArrayList<BoardDto>();
         BoardExample boardExample = new BoardExample();
         BoardExample.Criteria criteria = boardExample.createCriteria();
         BoardExample.Criteria criteria1 = boardExample.createCriteria();
@@ -299,11 +332,27 @@ public class PartServiceImpl implements PartService{
         criteria1.andBoardDescribeLike("%"+searchContent+"%");
         boardExample.or(criteria1);
         List<Board> boardList = boardMapper.selectByExample(boardExample);
-        return boardList;
+
+        if(stop > boardList.size()){
+            stop = boardList.size();
+        }
+        for (Integer i = start; i < stop; i++) {
+            BoardDto boardDto = new BoardDto();
+            BoardDetail boardDetail = boardDetailMapper.selectByPrimaryKey(boardList.get(i).getBoardId());
+            if(boardDetail !=null){
+                boardDto.setBoardDetail(boardDetail);
+            }else {
+                boardDto.setBoardDetail(new BoardDetail());
+            }
+            boardDto.setBoard(boardList.get(i));
+            boardDtoList.add(boardDto);
+        }
+        return boardDtoList;
     }
 
     @Override
-    public List<Power> searchPowerPartLike(String searchContent){
+    public List<PowerDto> searchPowerPartLike(String searchContent,Integer start,Integer stop){
+        List<PowerDto> powerDtoList = new ArrayList<PowerDto>();
         PowerExample powerExample = new PowerExample();
         PowerExample.Criteria criteria = powerExample.createCriteria();
         PowerExample.Criteria criteria1 = powerExample.createCriteria();
@@ -311,11 +360,27 @@ public class PartServiceImpl implements PartService{
         criteria.andPowerNameLike("%"+searchContent+"%");
         powerExample.or(criteria1);
         List<Power> powerList = powerMapper.selectByExample(powerExample);
-        return powerList;
+
+        if(stop > powerList.size()){
+            stop = powerList.size();
+        }
+        for (Integer i = start; i < stop; i++) {
+            PowerDto powerDto = new PowerDto();
+            PowerDetail powerDetail = powerDetailMapper.selectByPrimaryKey(powerList.get(i).getPowerId());
+            if(powerDetail !=null){
+                powerDto.setPowerDetail(powerDetail);
+            }else {
+                powerDto.setPowerDetail(new PowerDetail());
+            }
+            powerDto.setPower(powerList.get(i));
+            powerDtoList.add(powerDto);
+        }
+        return powerDtoList;
     }
 
     @Override
-    public List<Vga> searchVgaPartLike(String searchContent){
+    public List<VgaDto> searchVgaPartLike(String searchContent,Integer start,Integer stop){
+        List<VgaDto> vgaDtoList = new ArrayList<VgaDto>();
         VgaExample vgaExample = new VgaExample();
         VgaExample.Criteria criteria = vgaExample.createCriteria();
         VgaExample.Criteria criteria1 = vgaExample.createCriteria();
@@ -323,6 +388,22 @@ public class PartServiceImpl implements PartService{
         criteria.andVgaNameLike("%"+searchContent+"%");
         vgaExample.or(criteria1);
         List<Vga> vgaList = vgaMapper.selectByExample(vgaExample);
-        return vgaList;
+
+        if(stop > vgaList.size()){
+            stop = vgaList.size();
+        }
+        for (Integer i = start; i < stop; i++) {
+            VgaDto vgaDto = new VgaDto();
+            vgaDto.setVga(vgaList.get(i));
+            VgaDetail vgaDetail = vgaDetailMapper.selectByPrimaryKey(vgaList.get(i).getVgaId());
+            if(vgaDetail !=null){
+                vgaDto.setVgaDetail(vgaDetail);
+            }else {
+                vgaDetail = new VgaDetail();
+                vgaDto.setVgaDetail(vgaDetail);
+            }
+            vgaDtoList.add(vgaDto);
+        }
+        return vgaDtoList;
     }
 }

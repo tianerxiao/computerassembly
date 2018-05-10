@@ -88,29 +88,32 @@ public class PartController {
     public @ResponseBody
     Message searchPart(@RequestBody SearchContent searchContent){
         Message message = new Message();
+        Integer start = searchContent.getPage()*10;
+        Integer stop =start+10;
         if("CPU".equals(searchContent.getPart().toUpperCase())){
+
             message.setCode(MessageCode.ok);
-            message.setData(partService.searchCpuPartLike(searchContent.getSearchContent()));
+            message.setData(partService.searchCpuPartLike(searchContent.getSearchContent(),start,stop));
             return message;
         }
         if ("内存".equals(searchContent.getPart().toUpperCase())){
             message.setCode(MessageCode.ok);
-            message.setData(partService.searchMemoryPartLike(searchContent.getSearchContent()));
+            message.setData(partService.searchMemoryPartLike(searchContent.getSearchContent(),start,stop));
             return message;
         }
         if ("显卡".equals(searchContent.getPart().toUpperCase())){
             message.setCode(MessageCode.ok);
-            message.setData(partService.searchVgaPartLike(searchContent.getSearchContent()));
+            message.setData(partService.searchVgaPartLike(searchContent.getSearchContent(),start,stop));
             return message;
         }
         if ("主板".equals(searchContent.getPart().toUpperCase())){
-            message.setData(partService.searchBoardPartLike(searchContent.getSearchContent()));
+            message.setData(partService.searchBoardPartLike(searchContent.getSearchContent(),start,stop));
             message.setCode(MessageCode.ok);
             return message;
         }
         if ("电源".equals(searchContent.getPart().toUpperCase())){
             message.setCode(MessageCode.ok);
-            message.setData(partService.searchPowerPartLike(searchContent.getSearchContent()));
+            message.setData(partService.searchPowerPartLike(searchContent.getSearchContent(),start,stop));
             return message;
         }
         message.setCode(MessageCode.nofound);

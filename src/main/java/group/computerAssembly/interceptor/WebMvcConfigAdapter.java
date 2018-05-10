@@ -34,6 +34,7 @@ public class WebMvcConfigAdapter extends WebMvcConfigurationSupport {
     protected void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/*")
                 .allowedOrigins("*")
+                .allowCredentials(true)
                 .allowedMethods("POST, GET, OPTIONS, DELETE,PUT")
                 .allowedHeaders("x-requested-with,Authorization");
     }

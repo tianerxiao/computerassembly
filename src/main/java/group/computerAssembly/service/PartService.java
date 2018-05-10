@@ -18,9 +18,10 @@ public interface PartService {
     List<VgaDto> getVgasLimit(List<VgaDetail> vgaDetails, Integer start, Integer stop);
     List<PowerDetail> getPowerDetails(PowerDetail powerDetail);
     List<PowerDto> getPowersLimit(List<PowerDetail> powerDetails, Integer start, Integer stop);
-    List<Cpu> searchCpuPartLike(String searchContent);
-    List<Memory> searchMemoryPartLike(String searchContent);
-    List<Vga> searchVgaPartLike(String searchContent);
-    List<Power> searchPowerPartLike(String searchContent);
-    List<Board> searchBoardPartLike(String searchContent);
+
+    List<CpuDto> searchCpuPartLike(String searchContent,Integer start,Integer stop);
+    List<MemoryDto> searchMemoryPartLike(String searchContent,Integer start,Integer stop);
+    List<VgaDto> searchVgaPartLike(String searchContent,Integer start,Integer stop);
+    List<PowerDto> searchPowerPartLike(String searchContent,Integer start,Integer stop);
+    List<BoardDto> searchBoardPartLike(String searchContent,Integer start,Integer stop);
 }
