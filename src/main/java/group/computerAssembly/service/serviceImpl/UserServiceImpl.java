@@ -6,6 +6,7 @@ import group.computerAssembly.dto.UserDto;
 import group.computerAssembly.entity.CpuDetail;
 import group.computerAssembly.entity.CpuDetailExample;
 import group.computerAssembly.entity.UserAccount;
+import group.computerAssembly.entity.UserInfo;
 import group.computerAssembly.service.UserService;
 import group.computerAssembly.utils.MD5Util;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,9 +49,25 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public void addNewUser(UserAccount userAccount) {
+        UserInfo userInfo =  new UserInfo();
+        userInfo.setUserId(userAccount.getUserId());
+        userInfo.setUserEmail("");
+        userInfo.setUserName("");
+        userInfo.setUserPhone("");
         String decodePassword = MD5Util.encode(userAccount.getUserPasswd());
         userAccount.setUserPasswd(decodePassword);
         userAccountMapper.insert(userAccount);
+        userInfoMapper.insert(userInfo);
     }
 
+    @Override
+    public void modifyPassword(UserAccount userAccount, String newPassword) {
+        userAccount.setUserPasswd(MD5Util.encode(newPassword));
+        userAccountMapper.updateByPrimaryKeySelective(userAccount);
+    }
+
+    @Override
+    public void updateUserInfo(UserInfo userInfo) {
+        userInfoMapper.updateByPrimaryKeySelective(userInfo);
+    }
 }

@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="group.computerAssembly.dao.ComputerPartMapper" >
+  <resultMap id="BaseResultMap" type="group.computerAssembly.entity.ComputerPart" >
+    <constructor >
+      <idArg column="part_table_id" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="user_id" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="cpu_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="board_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="mem_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="power_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="vga_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="part_table_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="part_table_describe" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    part_table_id, user_id, cpu_id, board_id, mem_id, power_id, vga_id, create_time, 
+    part_table_name, part_table_describe
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="group.computerAssembly.entity.ComputerPartExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from computer_part
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from computer_part
+    where part_table_id = #{partTableId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from computer_part
+    where part_table_id = #{partTableId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="group.computerAssembly.entity.ComputerPart" >
+    insert into computer_part (part_table_id, user_id, cpu_id, 
+      board_id, mem_id, power_id, 
+      vga_id, create_time, part_table_name, 
+      part_table_describe)
+    values (#{partTableId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{cpuId,jdbcType=INTEGER}, 
+      #{boardId,jdbcType=INTEGER}, #{memId,jdbcType=INTEGER}, #{powerId,jdbcType=INTEGER}, 
+      #{vgaId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{partTableName,jdbcType=VARCHAR}, 
+      #{partTableDescribe,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="group.computerAssembly.entity.ComputerPart" >
+    insert into computer_part
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="partTableId != null" >
+        part_table_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="cpuId != null" >
+        cpu_id,
+      </if>
+      <if test="boardId != null" >
+        board_id,
+      </if>
+      <if test="memId != null" >
+        mem_id,
+      </if>
+      <if test="powerId != null" >
+        power_id,
+      </if>
+      <if test="vgaId != null" >
+        vga_id,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="partTableName != null" >
+        part_table_name,
+      </if>
+      <if test="partTableDescribe != null" >
+        part_table_describe,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="partTableId != null" >
+        #{partTableId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="cpuId != null" >
+        #{cpuId,jdbcType=INTEGER},
+      </if>
+      <if test="boardId != null" >
+        #{boardId,jdbcType=INTEGER},
+      </if>
+      <if test="memId != null" >
+        #{memId,jdbcType=INTEGER},
+      </if>
+      <if test="powerId != null" >
+        #{powerId,jdbcType=INTEGER},
+      </if>
+      <if test="vgaId != null" >
+        #{vgaId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="partTableName != null" >
+        #{partTableName,jdbcType=VARCHAR},
+      </if>
+      <if test="partTableDescribe != null" >
+        #{partTableDescribe,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update computer_part
+    <set >
+      <if test="record.partTableId != null" >
+        part_table_id = #{record.partTableId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cpuId != null" >
+        cpu_id = #{record.cpuId,jdbcType=INTEGER},
+      </if>
+      <if test="record.boardId != null" >
+        board_id = #{record.boardId,jdbcType=INTEGER},
+      </if>
+      <if test="record.memId != null" >
+        mem_id = #{record.memId,jdbcType=INTEGER},
+      </if>
+      <if test="record.powerId != null" >
+        power_id = #{record.powerId,jdbcType=INTEGER},
+      </if>
+      <if test="record.vgaId != null" >
+        vga_id = #{record.vgaId,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.partTableName != null" >
+        part_table_name = #{record.partTableName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.partTableDescribe != null" >
+        part_table_describe = #{record.partTableDescribe,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update computer_part
+    set part_table_id = #{record.partTableId,jdbcType=VARCHAR},
+      user_id = #{record.userId,jdbcType=VARCHAR},
+      cpu_id = #{record.cpuId,jdbcType=INTEGER},
+      board_id = #{record.boardId,jdbcType=INTEGER},
+      mem_id = #{record.memId,jdbcType=INTEGER},
+      power_id = #{record.powerId,jdbcType=INTEGER},
+      vga_id = #{record.vgaId,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      part_table_name = #{record.partTableName,jdbcType=VARCHAR},
+      part_table_describe = #{record.partTableDescribe,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="group.computerAssembly.entity.ComputerPart" >
+    update computer_part
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="cpuId != null" >
+        cpu_id = #{cpuId,jdbcType=INTEGER},
+      </if>
+      <if test="boardId != null" >
+        board_id = #{boardId,jdbcType=INTEGER},
+      </if>
+      <if test="memId != null" >
+        mem_id = #{memId,jdbcType=INTEGER},
+      </if>
+      <if test="powerId != null" >
+        power_id = #{powerId,jdbcType=INTEGER},
+      </if>
+      <if test="vgaId != null" >
+        vga_id = #{vgaId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="partTableName != null" >
+        part_table_name = #{partTableName,jdbcType=VARCHAR},
+      </if>
+      <if test="partTableDescribe != null" >
+        part_table_describe = #{partTableDescribe,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where part_table_id = #{partTableId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="group.computerAssembly.entity.ComputerPart" >
+    update computer_part
+    set user_id = #{userId,jdbcType=VARCHAR},
+      cpu_id = #{cpuId,jdbcType=INTEGER},
+      board_id = #{boardId,jdbcType=INTEGER},
+      mem_id = #{memId,jdbcType=INTEGER},
+      power_id = #{powerId,jdbcType=INTEGER},
+      vga_id = #{vgaId,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      part_table_name = #{partTableName,jdbcType=VARCHAR},
+      part_table_describe = #{partTableDescribe,jdbcType=VARCHAR}
+    where part_table_id = #{partTableId,jdbcType=VARCHAR}
+  </update>
+</mapper>

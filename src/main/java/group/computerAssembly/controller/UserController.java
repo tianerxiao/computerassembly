@@ -3,6 +3,7 @@ package group.computerAssembly.controller;
 import group.computerAssembly.dto.Message;
 import group.computerAssembly.dto.UserDto;
 import group.computerAssembly.entity.UserAccount;
+import group.computerAssembly.entity.UserInfo;
 import group.computerAssembly.enums.MessageCode;
 import group.computerAssembly.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -91,9 +92,9 @@ public class UserController {
     /**
      * 注册新用户
      */
-    @PostMapping("/user")
+    @PostMapping("/user-account")
     public @ResponseBody
-    Message postUser(HttpServletRequest requestc, @RequestBody UserAccount userAccount){
+    Message postUserAccount(HttpServletRequest request, @RequestBody UserAccount userAccount){
         Message message = new Message();
         if (userAccount.getUserId()==null){
             message.setCode(MessageCode.error);
@@ -125,5 +126,61 @@ public class UserController {
             message.setData("用户名已存在");
             return message;
         }
+    }
+    /**
+    *修改密码
+    */
+    @PutMapping("/user-account")
+    public @ResponseBody
+    Message putUserAccount(HttpServletRequest request,@RequestBody UserAccount userAccount){
+        Message message = new Message();
+        if(userAccount.getUserId() == null){
+            message.setCode(MessageCode.error);
+            message.setData("新密码不能为空");
+            return message;
+        }
+        if (userAccount.getUserPasswd() == null){
+            message.setCode(MessageCode.error);
+            message.setData("旧密码不能为空");
+            return message;
+        }
+        String newPassword = userAccount.getUserId();
+        userAccount.setUserId(request.getSession().getAttribute("userId").toString());
+        if (userService.matchPassword(userAccount)){
+            try {
+                userService.modifyPassword(userAccount,newPassword);
+                message.setCode(MessageCode.ok);
+                message.setData("修改成功");
+                return message;
+            }catch (Exception e){
+                e.printStackTrace();
+                message.setCode(MessageCode.error);
+                message.setData("修改失败");
+                return message;
+            }
+        }else {
+            message.setCode(MessageCode.error);
+            message.setData("密码错误");
+            return message;
+        }
+    }
+    /**
+     * 更新信息
+     */
+    @PutMapping("/user-info")
+    public @ResponseBody
+    Message putUserInfo(HttpServletRequest request, @RequestBody UserInfo userInfo){
+        Message msg = new Message();
+        String userId = request.getSession().getAttribute("userId").toString();
+        if(userId==null){
+            msg.setData("未登录");
+            msg.setCode(MessageCode.nologin);
+            return msg;
+        }
+        userInfo.setUserId(userId);
+        userService.updateUserInfo(userInfo);
+        msg.setCode(MessageCode.ok);
+        msg.setData("修改成功");
+        return msg;
     }
 }

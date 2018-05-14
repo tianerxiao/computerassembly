@@ -90,6 +90,9 @@ public class PartController {
         Message message = new Message();
         Integer start = searchContent.getPage()*10;
         Integer stop =start+10;
+        if(searchContent.getSearchContent() == null){
+            searchContent.setSearchContent("");
+        }
         if("CPU".equals(searchContent.getPart().toUpperCase())){
 
             message.setCode(MessageCode.ok);

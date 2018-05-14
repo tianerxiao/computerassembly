@@ -19,6 +19,7 @@ public class WebMvcConfigAdapter extends WebMvcConfigurationSupport {
         addInterceptor.excludePathPatterns("/index");
         addInterceptor.excludePathPatterns("/user/session");
         addInterceptor.excludePathPatterns("/static/**");
+        addInterceptor.excludePathPatterns("/part/**");
 
 
         addInterceptor.addPathPatterns("/**");
