@@ -2,11 +2,9 @@ package group.computerAssembly.service.serviceImpl;
 
 import group.computerAssembly.dao.UserAccountMapper;
 import group.computerAssembly.dao.UserInfoMapper;
+import group.computerAssembly.dao.UserRoleMapper;
 import group.computerAssembly.dto.UserDto;
-import group.computerAssembly.entity.CpuDetail;
-import group.computerAssembly.entity.CpuDetailExample;
-import group.computerAssembly.entity.UserAccount;
-import group.computerAssembly.entity.UserInfo;
+import group.computerAssembly.entity.*;
 import group.computerAssembly.service.UserService;
 import group.computerAssembly.utils.MD5Util;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -24,12 +23,16 @@ public class UserServiceImpl implements UserService{
     UserInfoMapper userInfoMapper;
     @Autowired
     UserAccountMapper userAccountMapper;
+    @Autowired
+    UserRoleMapper userRoleMapper;
 
     @Override
     public UserDto findUserById(String userId) {
         UserDto userDto = new UserDto();
         userDto.setUserAccount(userAccountMapper.selectByPrimaryKey(userId));
         userDto.setUserInfo(userInfoMapper.selectByPrimaryKey(userId));
+        userDto.setUserRole(userRoleMapper.selectByPrimaryKey(userId));
+        userDto.getUserAccount().setUserPasswd("");
         return userDto;
     }
 
@@ -50,6 +53,9 @@ public class UserServiceImpl implements UserService{
     @Override
     public void addNewUser(UserAccount userAccount) {
         UserInfo userInfo =  new UserInfo();
+        UserRole userRole = new UserRole();
+        userRole.setUserId(userAccount.getUserId());
+        userRole.setUserRole(2);
         userInfo.setUserId(userAccount.getUserId());
         userInfo.setUserEmail("");
         userInfo.setUserName("");
@@ -58,6 +64,7 @@ public class UserServiceImpl implements UserService{
         userAccount.setUserPasswd(decodePassword);
         userAccountMapper.insert(userAccount);
         userInfoMapper.insert(userInfo);
+        userRoleMapper.insert(userRole);
     }
 
     @Override
@@ -69,5 +76,26 @@ public class UserServiceImpl implements UserService{
     @Override
     public void updateUserInfo(UserInfo userInfo) {
         userInfoMapper.updateByPrimaryKeySelective(userInfo);
+    }
+
+    @Override
+    public UserRole getUserRole(String userId) {
+        return userRoleMapper.selectByPrimaryKey(userId);
+    }
+
+    @Override
+    public List<UserDto> getUserList() {
+        List<UserDto> userDtoList = new ArrayList<UserDto>();
+        UserAccountExample example = new UserAccountExample();
+        UserAccountExample.Criteria criteria= example.createCriteria();
+        criteria.andUserIdIsNotNull();
+        List<UserAccount> userAccountList = userAccountMapper.selectByExample(example);
+        for (UserAccount userAccount:userAccountList){
+            UserDto userDto = new UserDto();
+            userDto.setUserInfo(userInfoMapper.selectByPrimaryKey(userAccount.getUserId()));
+            userDto.setUserAccount(userAccount);
+            userDtoList.add(userDto);
+        }
+        return userDtoList;
     }
 }

@@ -6,9 +6,11 @@ import group.computerAssembly.dto.*;
 import group.computerAssembly.entity.*;
 import group.computerAssembly.enums.MessageCode;
 import group.computerAssembly.service.PartService;
+import group.computerAssembly.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.UUID;
 
@@ -17,6 +19,8 @@ import java.util.UUID;
 public class PartController {
     @Autowired
     PartService partService;
+    @Autowired
+    UserService userService;
 
 
     @PostMapping("/cpu-part/{page}")
@@ -122,5 +126,206 @@ public class PartController {
         message.setCode(MessageCode.nofound);
         message.setData("");
         return message;
+    }
+
+    @PostMapping("/get-part")
+    public @ResponseBody
+    Message getPartById(HttpServletRequest request, @RequestBody SearchContent searchContent){
+        Message message = new Message();
+        if(searchContent.getSearchContent() == null){
+            message.setCode(MessageCode.nofound);
+            message.setData("");
+            return message;
+        }
+        String userId = request.getSession().getAttribute("userId").toString();
+        if(userId==null){
+            message.setData("未登录");
+            message.setCode(MessageCode.nologin);
+            return message;
+        }
+        if(userService.getUserRole(userId).getUserRole() == 2){
+            return partService.getPartById(searchContent);
+        }else {
+            message.setData("无权限");
+            message.setCode(MessageCode.forbidden);
+            return message;
+        }
+    }
+
+    @DeleteMapping("/delete-part")
+    public @ResponseBody
+    Message deletePartById(HttpServletRequest request,@RequestBody SearchContent searchContent){
+        Message message = new Message();
+        if(searchContent.getSearchContent() == null){
+            message.setCode(MessageCode.nofound);
+            message.setData("");
+            return message;
+        }
+        String userId = request.getSession().getAttribute("userId").toString();
+        if(userId==null){
+            message.setData("未登录");
+            message.setCode(MessageCode.nologin);
+            return message;
+        }
+        if(userService.getUserRole(userId).getUserRole() == 2){
+            partService.deletePartById(searchContent);
+            message.setData("删除成功");
+            message.setCode(MessageCode.ok);
+            return message;
+        }else {
+            message.setData("无权限");
+            message.setCode(MessageCode.forbidden);
+            return message;
+        }
+    }
+
+    @PostMapping("/cpu")
+    public @ResponseBody
+    Message postCpu(HttpServletRequest request,@RequestBody CpuDto cpuDto){
+        Message message = new Message();
+        String userId = request.getSession().getAttribute("userId").toString();
+        if(userId==null){
+            message.setData("未登录");
+            message.setCode(MessageCode.nologin);
+            return message;
+        }
+        if(userService.getUserRole(userId).getUserRole() == 2){
+            try {
+                partService.addCpu(cpuDto);
+                message.setData("添加成功");
+                message.setCode(MessageCode.ok);
+                return message;
+            }catch (Exception e){
+                e.printStackTrace();
+                message.setData("添加失败");
+                message.setCode(MessageCode.ok);
+                return message;
+            }
+
+        }else {
+            message.setData("无权限");
+            message.setCode(MessageCode.forbidden);
+            return message;
+        }
+    }
+
+    @PostMapping("/board")
+    public @ResponseBody
+    Message postCpu(HttpServletRequest request,@RequestBody BoardDto boardDto){
+        Message message = new Message();
+        String userId = request.getSession().getAttribute("userId").toString();
+        if(userId==null){
+            message.setData("未登录");
+            message.setCode(MessageCode.nologin);
+            return message;
+        }
+        if(userService.getUserRole(userId).getUserRole() == 2){
+            try {
+                partService.addBoard(boardDto);
+                message.setData("添加成功");
+                message.setCode(MessageCode.ok);
+                return message;
+            }catch (Exception e){
+                e.printStackTrace();
+                message.setData("添加失败");
+                message.setCode(MessageCode.ok);
+                return message;
+            }
+
+        }else {
+            message.setData("无权限");
+            message.setCode(MessageCode.forbidden);
+            return message;
+        }
+    }
+
+    @PostMapping("/vga")
+    public @ResponseBody
+    Message postCpu(HttpServletRequest request,@RequestBody VgaDto vgaDto){
+        Message message = new Message();
+        String userId = request.getSession().getAttribute("userId").toString();
+        if(userId==null){
+            message.setData("未登录");
+            message.setCode(MessageCode.nologin);
+            return message;
+        }
+        if(userService.getUserRole(userId).getUserRole() == 2){
+            try {
+                partService.addVga(vgaDto);
+                message.setData("添加成功");
+                message.setCode(MessageCode.ok);
+                return message;
+            }catch (Exception e){
+                e.printStackTrace();
+                message.setData("添加失败");
+                message.setCode(MessageCode.ok);
+                return message;
+            }
+
+        }else {
+            message.setData("无权限");
+            message.setCode(MessageCode.forbidden);
+            return message;
+        }
+    }
+
+    @PostMapping("/memory")
+    public @ResponseBody
+    Message postCpu(HttpServletRequest request,@RequestBody MemoryDto memoryDto){
+        Message message = new Message();
+        String userId = request.getSession().getAttribute("userId").toString();
+        if(userId==null){
+            message.setData("未登录");
+            message.setCode(MessageCode.nologin);
+            return message;
+        }
+        if(userService.getUserRole(userId).getUserRole() == 2){
+            try {
+                partService.addMemory(memoryDto);
+                message.setData("添加成功");
+                message.setCode(MessageCode.ok);
+                return message;
+            }catch (Exception e){
+                e.printStackTrace();
+                message.setData("添加失败");
+                message.setCode(MessageCode.ok);
+                return message;
+            }
+
+        }else {
+            message.setData("无权限");
+            message.setCode(MessageCode.forbidden);
+            return message;
+        }
+    }
+
+    @PostMapping("/power")
+    public @ResponseBody
+    Message postCpu(HttpServletRequest request,@RequestBody PowerDto powerDto){
+        Message message = new Message();
+        String userId = request.getSession().getAttribute("userId").toString();
+        if(userId==null){
+            message.setData("未登录");
+            message.setCode(MessageCode.nologin);
+            return message;
+        }
+        if(userService.getUserRole(userId).getUserRole() == 2){
+            try {
+                partService.addPower(powerDto);
+                message.setData("添加成功");
+                message.setCode(MessageCode.ok);
+                return message;
+            }catch (Exception e){
+                e.printStackTrace();
+                message.setData("添加失败");
+                message.setCode(MessageCode.ok);
+                return message;
+            }
+
+        }else {
+            message.setData("无权限");
+            message.setCode(MessageCode.forbidden);
+            return message;
+        }
     }
 }

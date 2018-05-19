@@ -3,6 +3,7 @@ package group.computerAssembly.service.serviceImpl;
 import group.computerAssembly.dao.*;
 import group.computerAssembly.dto.*;
 import group.computerAssembly.entity.*;
+import group.computerAssembly.enums.MessageCode;
 import group.computerAssembly.service.PartService;
 import org.springframework.beans.BeanWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -405,5 +406,127 @@ public class PartServiceImpl implements PartService{
             vgaDtoList.add(vgaDto);
         }
         return vgaDtoList;
+    }
+
+    @Override
+    public Message getPartById(SearchContent searchContent) {
+        Message message = new Message();
+        if("CPU".equals(searchContent.getPart().toUpperCase())){
+            message.setCode(MessageCode.nofound);
+            message.setData(cpuMapper.selectByPrimaryKey(Integer.parseInt(searchContent.getSearchContent())));
+            return message;
+        }
+        if ("内存".equals(searchContent.getPart().toUpperCase())){
+            message.setCode(MessageCode.nofound);
+            message.setData(memoryMapper.selectByPrimaryKey(Integer.parseInt(searchContent.getSearchContent())));
+            return message;
+        }
+        if ("显卡".equals(searchContent.getPart().toUpperCase())){
+            message.setCode(MessageCode.nofound);
+            message.setData(vgaMapper.selectByPrimaryKey(Integer.parseInt(searchContent.getSearchContent())));
+            return message;
+        }
+        if ("主板".equals(searchContent.getPart().toUpperCase())){
+            message.setCode(MessageCode.nofound);
+            message.setData(boardMapper.selectByPrimaryKey(Integer.parseInt(searchContent.getSearchContent())));
+            return message;
+        }
+        if ("电源".equals(searchContent.getPart().toUpperCase())){
+            message.setCode(MessageCode.nofound);
+            message.setData(powerMapper.selectByPrimaryKey(Integer.parseInt(searchContent.getSearchContent())));
+            return message;
+        }
+        message.setCode(MessageCode.nofound);
+        message.setData("");
+        return message;
+    }
+
+    @Override
+    public void deletePartById(SearchContent searchContent) {
+        if("CPU".equals(searchContent.getPart().toUpperCase())){
+            CpuDetailExample cpuDetailExample = new CpuDetailExample();
+            CpuDetailExample.Criteria criteria = cpuDetailExample.createCriteria();
+            criteria.andCpudNameEqualTo(searchContent.getSearchContent());
+            cpuDetailMapper.deleteByExample(cpuDetailExample);
+
+            CpuExample cpuExample = new CpuExample();
+            CpuExample.Criteria criteria1 = cpuExample.createCriteria();
+            criteria1.andCpuNameEqualTo(searchContent.getSearchContent());
+            cpuMapper.deleteByExample(cpuExample);
+        }
+        if ("内存".equals(searchContent.getPart().toUpperCase())){
+            MemoryExample memoryExample = new MemoryExample();
+            MemoryExample.Criteria criteria = memoryExample.createCriteria();
+            criteria.andMemNameEqualTo(searchContent.getSearchContent());
+            memoryMapper.deleteByExample(memoryExample);
+
+            MemoryDetailExample memoryDetailExample = new MemoryDetailExample();
+            MemoryDetailExample.Criteria criteria1 = memoryDetailExample.createCriteria();
+            criteria1.andMemdNameEqualTo(searchContent.getSearchContent());
+            memoryDetailMapper.deleteByExample(memoryDetailExample);
+        }
+        if ("显卡".equals(searchContent.getPart().toUpperCase())){
+            VgaExample vgaExample = new VgaExample();
+            VgaExample.Criteria criteria = vgaExample.createCriteria();
+            criteria.andVgaNameEqualTo(searchContent.getSearchContent());
+            vgaMapper.deleteByExample(vgaExample);
+
+            VgaDetailExample vgaDetailExample = new VgaDetailExample();
+            VgaDetailExample.Criteria criteria1 = vgaDetailExample.createCriteria();
+            criteria1.andVgadNameEqualTo(searchContent.getSearchContent());
+            vgaDetailMapper.deleteByExample(vgaDetailExample);
+        }
+        if ("主板".equals(searchContent.getPart().toUpperCase())){
+            BoardExample boardExample = new BoardExample();
+            BoardExample.Criteria criteria = boardExample.createCriteria();
+            criteria.andBoardNameEqualTo(searchContent.getSearchContent());
+            boardMapper.deleteByExample(boardExample);
+
+            BoardDetailExample boardDetailExample = new BoardDetailExample();
+            BoardDetailExample.Criteria criteria1 = boardDetailExample.createCriteria();
+            criteria1.andBoarddNameEqualTo(searchContent.getSearchContent());
+            boardDetailMapper.deleteByExample(boardDetailExample);
+        }
+        if ("电源".equals(searchContent.getPart().toUpperCase())){
+            PowerExample powerExample = new PowerExample();
+            PowerExample.Criteria criteria = powerExample.createCriteria();
+            criteria.andPowerNameEqualTo(searchContent.getSearchContent());
+            powerMapper.deleteByExample(powerExample);
+
+            PowerDetailExample powerDetailExample = new PowerDetailExample();
+            PowerDetailExample.Criteria criteria1 = powerDetailExample.createCriteria();
+            criteria1.andPowerdNameEqualTo(searchContent.getSearchContent());
+            powerDetailMapper.deleteByExample(powerDetailExample);
+        }
+    }
+
+    @Override
+    public void addCpu(CpuDto cpuDto) {
+        cpuMapper.insertSelective(cpuDto.getCpu());
+        cpuDetailMapper.insertSelective(cpuDto.getCpuDetail());
+    }
+
+    @Override
+    public void addBoard(BoardDto boardDto) {
+        boardMapper.insertSelective(boardDto.getBoard());
+        boardDetailMapper.insertSelective(boardDto.getBoardDetail());
+    }
+
+    @Override
+    public void addMemory(MemoryDto memoryDto) {
+        memoryMapper.insertSelective(memoryDto.getMemory());
+        memoryDetailMapper.insertSelective(memoryDto.getMemoryDetail());
+    }
+
+    @Override
+    public void addPower(PowerDto powerDto) {
+        powerMapper.insertSelective(powerDto.getPower());
+        powerDetailMapper.insertSelective(powerDto.getPowerDetail());
+    }
+
+    @Override
+    public void addVga(VgaDto vgaDto) {
+        vgaMapper.insertSelective(vgaDto.getVga());
+        vgaDetailMapper.insertSelective(vgaDto.getVgaDetail());
     }
 }

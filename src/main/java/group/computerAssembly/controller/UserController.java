@@ -30,8 +30,10 @@ public class UserController {
             msg.setCode(MessageCode.nologin);
             return msg;
         }
-        UserDto userDto = userService.findUserById(request.getSession().getAttribute("userId").toString());
+        String userId = request.getSession().getAttribute("userId").toString();
+        UserDto userDto = userService.findUserById(userId);
         userDto.getUserAccount().setUserPasswd("");
+        userDto.setUserRole(userService.getUserRole(userId));
         msg.setData(userDto);
         msg.setCode(MessageCode.ok);
         return msg;
@@ -55,7 +57,7 @@ public class UserController {
         }
         if (userService.matchPassword(userAccount)){
             message.setCode(MessageCode.ok);
-            message.setData("登录成功");
+            message.setData(userService.findUserById(userAccount.getUserId()));
             request.getSession().setAttribute("userId",userAccount.getUserId());
             return message;
         }else {
@@ -183,4 +185,26 @@ public class UserController {
         msg.setData("修改成功");
         return msg;
     }
+
+    @GetMapping("/userList")
+    public @ResponseBody
+    Message getUserList(HttpServletRequest request){
+        Message msg = new Message();
+        String userId = request.getSession().getAttribute("userId").toString();
+        if(userId==null){
+            msg.setData("未登录");
+            msg.setCode(MessageCode.nologin);
+            return msg;
+        }
+        if(userService.getUserRole(userId).getUserRole() == 2){
+            msg.setData(userService.getUserList());
+            msg.setCode(MessageCode.ok);
+            return msg;
+        }else {
+            msg.setData("无权限");
+            msg.setCode(MessageCode.forbidden);
+            return msg;
+        }
+    }
+
 }
