@@ -9,6 +9,9 @@
       <arg column="comment" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
       <arg column="price" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="pay" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="express" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="sign" jdbcType="VARCHAR" javaType="java.lang.String" />
     </constructor>
   </resultMap>
   <sql id="Example_Where_Clause" >
@@ -40,8 +43,37 @@
       </foreach>
     </where>
   </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
   <sql id="Base_Column_List" >
-    order_id, part_table_id, user_id, comment, create_time, price
+    order_id, part_table_id, user_id, comment, create_time, price, pay, express, sign
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="group.computerAssembly.entity.ComputerOrderExample" >
     select
@@ -68,13 +100,19 @@
     delete from computer_order
     where order_id = #{orderId,jdbcType=VARCHAR}
   </delete>
+  <delete id="deleteByExample" parameterType="group.computerAssembly.entity.ComputerOrderExample" >
+    delete from computer_order
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
   <insert id="insert" parameterType="group.computerAssembly.entity.ComputerOrder" >
     insert into computer_order (order_id, part_table_id, user_id, 
-      comment, create_time, price
-      )
+      comment, create_time, price, 
+      pay, express, sign)
     values (#{orderId,jdbcType=VARCHAR}, #{partTableId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, 
-      #{comment,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{price,jdbcType=VARCHAR}
-      )
+      #{comment,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{price,jdbcType=VARCHAR}, 
+      #{pay,jdbcType=VARCHAR}, #{express,jdbcType=VARCHAR}, #{sign,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="group.computerAssembly.entity.ComputerOrder" >
     insert into computer_order
@@ -97,6 +135,15 @@
       <if test="price != null" >
         price,
       </if>
+      <if test="pay != null" >
+        pay,
+      </if>
+      <if test="express != null" >
+        express,
+      </if>
+      <if test="sign != null" >
+        sign,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="orderId != null" >
@@ -117,8 +164,67 @@
       <if test="price != null" >
         #{price,jdbcType=VARCHAR},
       </if>
+      <if test="pay != null" >
+        #{pay,jdbcType=VARCHAR},
+      </if>
+      <if test="express != null" >
+        #{express,jdbcType=VARCHAR},
+      </if>
+      <if test="sign != null" >
+        #{sign,jdbcType=VARCHAR},
+      </if>
     </trim>
   </insert>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update computer_order
+    <set >
+      <if test="record.orderId != null" >
+        order_id = #{record.orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.partTableId != null" >
+        part_table_id = #{record.partTableId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.comment != null" >
+        comment = #{record.comment,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.price != null" >
+        price = #{record.price,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pay != null" >
+        pay = #{record.pay,jdbcType=VARCHAR},
+      </if>
+      <if test="record.express != null" >
+        express = #{record.express,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sign != null" >
+        sign = #{record.sign,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update computer_order
+    set order_id = #{record.orderId,jdbcType=VARCHAR},
+      part_table_id = #{record.partTableId,jdbcType=VARCHAR},
+      user_id = #{record.userId,jdbcType=VARCHAR},
+      comment = #{record.comment,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      price = #{record.price,jdbcType=VARCHAR},
+      pay = #{record.pay,jdbcType=VARCHAR},
+      express = #{record.express,jdbcType=VARCHAR},
+      sign = #{record.sign,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
   <update id="updateByPrimaryKeySelective" parameterType="group.computerAssembly.entity.ComputerOrder" >
     update computer_order
     <set >
@@ -137,6 +243,15 @@
       <if test="price != null" >
         price = #{price,jdbcType=VARCHAR},
       </if>
+      <if test="pay != null" >
+        pay = #{pay,jdbcType=VARCHAR},
+      </if>
+      <if test="express != null" >
+        express = #{express,jdbcType=VARCHAR},
+      </if>
+      <if test="sign != null" >
+        sign = #{sign,jdbcType=VARCHAR},
+      </if>
     </set>
     where order_id = #{orderId,jdbcType=VARCHAR}
   </update>
@@ -146,7 +261,10 @@
       user_id = #{userId,jdbcType=VARCHAR},
       comment = #{comment,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
-      price = #{price,jdbcType=VARCHAR}
+      price = #{price,jdbcType=VARCHAR},
+      pay = #{pay,jdbcType=VARCHAR},
+      express = #{express,jdbcType=VARCHAR},
+      sign = #{sign,jdbcType=VARCHAR}
     where order_id = #{orderId,jdbcType=VARCHAR}
   </update>
 </mapper>

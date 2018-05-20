@@ -47,30 +47,141 @@ public class OrderServiceImpl implements OrderService {
     public ComputerOrder getComputerOrder(ComputerOrder computerOrder){
         return computerOrderMapper.selectByPrimaryKey(computerOrder.getOrderId());
     }
-
     @Override
     public ComputerPart getComputerPart(ComputerPart computerPart) {
         return computerPartMapper.selectByPrimaryKey(computerPart.getPartTableId());
     }
-
     @Override
-    public List<OrderDto> getOrderList(String userId){
+    public List<OrderDto> getNotPayOrderList(String userId){
         List<OrderDto> orderDtoList = new ArrayList<OrderDto>();
         ComputerOrderExample computerOrderExample = new ComputerOrderExample();
         ComputerOrderExample.Criteria criteria1 = computerOrderExample.createCriteria();
-        criteria1.andUserIdEqualTo(userId);
+        if(!"super".equals(userId)){
+            criteria1.andUserIdEqualTo(userId);
+        }
+        criteria1.andPayIsNull();
         List<ComputerOrder> computerOrderList = computerOrderMapper.selectByExample(computerOrderExample);
-        ComputerPartExample computerPartExample = new ComputerPartExample();
-        ComputerPartExample.Criteria criteria2 = computerPartExample.createCriteria();
-        criteria2.andUserIdEqualTo(userId);
-        List<ComputerPart> computerPartList = computerPartMapper.selectByExample(computerPartExample);
-        for (Integer i = 0; i<computerPartList.size(); i++){
+
+        for (Integer i = 0; i<computerOrderList.size(); i++){
             OrderDto orderDto = new OrderDto();
             orderDto.setComputerOrder(computerOrderList.get(i));
-            ComputerPart computerPart1 = computerPartList.get(i);
+            ComputerPart computerPart1 = computerPartMapper.selectByPrimaryKey(computerOrderList.get(i).getPartTableId());
             orderDto.setComputerPart(computerPart1);
             orderDtoList.add(orderDto);
         }
         return orderDtoList;
+    }
+    @Override
+    public List<OrderDto> getNotExpOrderList(String userId){
+        List<OrderDto> orderDtoList = new ArrayList<OrderDto>();
+        ComputerOrderExample computerOrderExample = new ComputerOrderExample();
+        ComputerOrderExample.Criteria criteria1 = computerOrderExample.createCriteria();
+        if(!"super".equals(userId)){
+            criteria1.andUserIdEqualTo(userId);
+        }
+        criteria1.andExpressIsNull();
+        criteria1.andPayEqualTo("已付款");
+        List<ComputerOrder> computerOrderList = computerOrderMapper.selectByExample(computerOrderExample);
+
+        for (Integer i = 0; i<computerOrderList.size(); i++){
+            OrderDto orderDto = new OrderDto();
+            orderDto.setComputerOrder(computerOrderList.get(i));
+            ComputerPart computerPart1 = computerPartMapper.selectByPrimaryKey(computerOrderList.get(i).getPartTableId());
+            orderDto.setComputerPart(computerPart1);
+            orderDtoList.add(orderDto);
+        }
+        return orderDtoList;
+    }
+    @Override
+    public List<OrderDto> getNotSignOrderList(String userId){
+        List<OrderDto> orderDtoList = new ArrayList<OrderDto>();
+        ComputerOrderExample computerOrderExample = new ComputerOrderExample();
+        ComputerOrderExample.Criteria criteria1 = computerOrderExample.createCriteria();
+        if(!"super".equals(userId)){
+            criteria1.andUserIdEqualTo(userId);
+        }
+        criteria1.andSignIsNull();
+        criteria1.andExpressEqualTo("已发货");
+        List<ComputerOrder> computerOrderList = computerOrderMapper.selectByExample(computerOrderExample);
+
+        for (Integer i = 0; i<computerOrderList.size(); i++){
+            OrderDto orderDto = new OrderDto();
+            orderDto.setComputerOrder(computerOrderList.get(i));
+            ComputerPart computerPart1 = computerPartMapper.selectByPrimaryKey(computerOrderList.get(i).getPartTableId());
+            orderDto.setComputerPart(computerPart1);
+            orderDtoList.add(orderDto);
+        }
+        return orderDtoList;
+    }
+    @Override
+    public List<OrderDto> getPayOrderList(String userId){
+        List<OrderDto> orderDtoList = new ArrayList<OrderDto>();
+        ComputerOrderExample computerOrderExample = new ComputerOrderExample();
+        ComputerOrderExample.Criteria criteria1 = computerOrderExample.createCriteria();
+        if(!"super".equals(userId)){
+            criteria1.andUserIdEqualTo(userId);
+        }
+        criteria1.andPayEqualTo("已发货");
+        criteria1.andExpressIsNull();
+        List<ComputerOrder> computerOrderList = computerOrderMapper.selectByExample(computerOrderExample);
+
+        for (Integer i = 0; i<computerOrderList.size(); i++){
+            OrderDto orderDto = new OrderDto();
+            orderDto.setComputerOrder(computerOrderList.get(i));
+            ComputerPart computerPart1 = computerPartMapper.selectByPrimaryKey(computerOrderList.get(i).getPartTableId());
+            orderDto.setComputerPart(computerPart1);
+            orderDtoList.add(orderDto);
+        }
+        return orderDtoList;
+    }
+    @Override
+    public List<OrderDto> getExpOrderList(String userId){
+        List<OrderDto> orderDtoList = new ArrayList<OrderDto>();
+        ComputerOrderExample computerOrderExample = new ComputerOrderExample();
+        ComputerOrderExample.Criteria criteria1 = computerOrderExample.createCriteria();
+        if(!"super".equals(userId)){
+            criteria1.andUserIdEqualTo(userId);
+        }
+        criteria1.andExpressEqualTo("已发货");
+        criteria1.andSignIsNull();
+        List<ComputerOrder> computerOrderList = computerOrderMapper.selectByExample(computerOrderExample);
+
+        for (Integer i = 0; i<computerOrderList.size(); i++){
+            OrderDto orderDto = new OrderDto();
+            orderDto.setComputerOrder(computerOrderList.get(i));
+            ComputerPart computerPart1 = computerPartMapper.selectByPrimaryKey(computerOrderList.get(i).getPartTableId());
+            orderDto.setComputerPart(computerPart1);
+            orderDtoList.add(orderDto);
+        }
+        return orderDtoList;
+    }
+    @Override
+    public List<OrderDto> getSignOrderList(String userId){
+        List<OrderDto> orderDtoList = new ArrayList<OrderDto>();
+        ComputerOrderExample computerOrderExample = new ComputerOrderExample();
+        ComputerOrderExample.Criteria criteria1 = computerOrderExample.createCriteria();
+        if(!"super".equals(userId)){
+            criteria1.andUserIdEqualTo(userId);
+        }
+        criteria1.andSignEqualTo("已签收");
+        criteria1.andCommentIsNull();
+        List<ComputerOrder> computerOrderList = computerOrderMapper.selectByExample(computerOrderExample);
+
+        for (Integer i = 0; i<computerOrderList.size(); i++){
+            OrderDto orderDto = new OrderDto();
+            orderDto.setComputerOrder(computerOrderList.get(i));
+            ComputerPart computerPart1 = computerPartMapper.selectByPrimaryKey(computerOrderList.get(i).getPartTableId());
+            orderDto.setComputerPart(computerPart1);
+            orderDtoList.add(orderDto);
+        }
+        return orderDtoList;
+    }
+    @Override
+    public void updateComputerOrderByKey(ComputerOrder computerOrder) {
+        computerOrderMapper.updateByPrimaryKeySelective(computerOrder);
+    }
+    @Override
+    public void deleteComputerOrderByKey(ComputerOrder computerOrder){
+        computerOrderMapper.deleteByPrimaryKey(computerOrder.getOrderId());
     }
 }

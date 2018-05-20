@@ -69,46 +69,46 @@
 
 
         <!--<table tableName="computer_order" domainObjectName="ComputerOrder"-->
-        <!--enableCountByExample="false" enableUpdateByExample="false"-->
-        <!--enableDeleteByExample="false" enableSelectByExample="true"-->
+        <!--enableCountByExample="false" enableUpdateByExample="true"-->
+        <!--enableDeleteByExample="true" enableSelectByExample="true"-->
         <!--selectByExampleQueryId="true">-->
         <!--<columnOverride column="comment" javaType="java.lang.String" jdbcType="VARCHAR" />-->
         <!--</table>-->
-        <table tableName="board" domainObjectName="Board"
-               enableCountByExample="false" enableUpdateByExample="true"
-               enableDeleteByExample="true" enableSelectByExample="true"
-               selectByExampleQueryId="true">
-            <columnOverride column="board_describe" javaType="java.lang.String" jdbcType="VARCHAR" />
-        </table>
+        <!--<table tableName="board" domainObjectName="Board"-->
+               <!--enableCountByExample="false" enableUpdateByExample="true"-->
+               <!--enableDeleteByExample="true" enableSelectByExample="true"-->
+               <!--selectByExampleQueryId="true">-->
+            <!--<columnOverride column="board_describe" javaType="java.lang.String" jdbcType="VARCHAR" />-->
+        <!--</table>-->
         <!--<table tableName="computer_part" domainObjectName="ComputerPart"-->
                <!--enableCountByExample="false" enableUpdateByExample="true"-->
                <!--enableDeleteByExample="false" enableSelectByExample="true"-->
                <!--selectByExampleQueryId="true">-->
             <!--<columnOverride column="part_table_describe" javaType="java.lang.String" jdbcType="VARCHAR" />-->
         <!--</table>-->
-        <table tableName="cpu" domainObjectName="Cpu"
-               enableCountByExample="false" enableUpdateByExample="true"
-               enableDeleteByExample="true" enableSelectByExample="true"
-               selectByExampleQueryId="true">
-            <columnOverride column="cpu_describe" javaType="java.lang.String" jdbcType="VARCHAR" />
-        </table>
-        <table tableName="cpu_detail" domainObjectName="CpuDetail"
-               enableCountByExample="false" enableUpdateByExample="true"
-               enableDeleteByExample="true" enableSelectByExample="true"
-               selectByExampleQueryId="true">
-        </table>
-        <table tableName="memory" domainObjectName="Memory"
-               enableCountByExample="false" enableUpdateByExample="true"
-               enableDeleteByExample="true" enableSelectByExample="true"
-               selectByExampleQueryId="true">
-            <columnOverride column="mem_describe" javaType="java.lang.String" jdbcType="VARCHAR" />
-        </table>
-        <table tableName="power" domainObjectName="Power"
-               enableCountByExample="false" enableUpdateByExample="true"
-               enableDeleteByExample="true" enableSelectByExample="true"
-               selectByExampleQueryId="true">
-            <columnOverride column="power_describe" javaType="java.lang.String" jdbcType="VARCHAR" />
-        </table>
+        <!--<table tableName="cpu" domainObjectName="Cpu"-->
+               <!--enableCountByExample="false" enableUpdateByExample="true"-->
+               <!--enableDeleteByExample="true" enableSelectByExample="true"-->
+               <!--selectByExampleQueryId="true">-->
+            <!--<columnOverride column="cpu_describe" javaType="java.lang.String" jdbcType="VARCHAR" />-->
+        <!--</table>-->
+        <!--<table tableName="cpu_detail" domainObjectName="CpuDetail"-->
+               <!--enableCountByExample="false" enableUpdateByExample="true"-->
+               <!--enableDeleteByExample="true" enableSelectByExample="true"-->
+               <!--selectByExampleQueryId="true">-->
+        <!--</table>-->
+        <!--<table tableName="memory" domainObjectName="Memory"-->
+               <!--enableCountByExample="false" enableUpdateByExample="true"-->
+               <!--enableDeleteByExample="true" enableSelectByExample="true"-->
+               <!--selectByExampleQueryId="true">-->
+            <!--<columnOverride column="mem_describe" javaType="java.lang.String" jdbcType="VARCHAR" />-->
+        <!--</table>-->
+        <!--<table tableName="power" domainObjectName="Power"-->
+               <!--enableCountByExample="false" enableUpdateByExample="true"-->
+               <!--enableDeleteByExample="true" enableSelectByExample="true"-->
+               <!--selectByExampleQueryId="true">-->
+            <!--<columnOverride column="power_describe" javaType="java.lang.String" jdbcType="VARCHAR" />-->
+        <!--</table>-->
         <!--<table tableName="role" domainObjectName="Role"-->
                <!--enableCountByExample="false" enableUpdateByExample="false"-->
                <!--enableDeleteByExample="false" enableSelectByExample="true"-->
@@ -119,41 +119,41 @@
                <!--enableDeleteByExample="false" enableSelectByExample="true"-->
                <!--selectByExampleQueryId="true">-->
         <!--</table>-->
-        <!--<table tableName="user_info" domainObjectName="UserInfo"-->
-               <!--enableCountByExample="false" enableUpdateByExample="false"-->
-               <!--enableDeleteByExample="false" enableSelectByExample="true"-->
-               <!--selectByExampleQueryId="true">-->
-        <!--</table>-->
+        <table tableName="user_info" domainObjectName="UserInfo"
+               enableCountByExample="false" enableUpdateByExample="true"
+               enableDeleteByExample="true" enableSelectByExample="true"
+               selectByExampleQueryId="true">
+        </table>
         <!--<table tableName="user_role" domainObjectName="UserRole"-->
                <!--enableCountByExample="false" enableUpdateByExample="false"-->
                <!--enableDeleteByExample="false" enableSelectByExample="true"-->
                <!--selectByExampleQueryId="true">-->
         <!--</table>-->
-        <table tableName="vga" domainObjectName="Vga"
-               enableCountByExample="false" enableUpdateByExample="true"
-               enableDeleteByExample="true" enableSelectByExample="true"
-               selectByExampleQueryId="true">
-            <columnOverride column="vga_describe" javaType="java.lang.String" jdbcType="VARCHAR" />
-        </table>
-        <table tableName="vga_detail" domainObjectName="VgaDetail"
-               enableCountByExample="false" enableUpdateByExample="true"
-               enableDeleteByExample="true" enableSelectByExample="true"
-               selectByExampleQueryId="true">
-        </table>
-        <table tableName="board_detail" domainObjectName="BoardDetail"
-               enableCountByExample="false" enableUpdateByExample="true"
-               enableDeleteByExample="true" enableSelectByExample="true"
-               selectByExampleQueryId="true">
-        </table>
-        <table tableName="memory_detail" domainObjectName="MemoryDetail"
-               enableCountByExample="false" enableUpdateByExample="true"
-               enableDeleteByExample="true" enableSelectByExample="true"
-               selectByExampleQueryId="true">
-        </table>
-        <table tableName="power_detail" domainObjectName="PowerDetail"
-               enableCountByExample="false" enableUpdateByExample="true"
-               enableDeleteByExample="true" enableSelectByExample="true"
-               selectByExampleQueryId="true">
-        </table>
+        <!--<table tableName="vga" domainObjectName="Vga"-->
+               <!--enableCountByExample="false" enableUpdateByExample="true"-->
+               <!--enableDeleteByExample="true" enableSelectByExample="true"-->
+               <!--selectByExampleQueryId="true">-->
+            <!--<columnOverride column="vga_describe" javaType="java.lang.String" jdbcType="VARCHAR" />-->
+        <!--</table>-->
+        <!--<table tableName="vga_detail" domainObjectName="VgaDetail"-->
+               <!--enableCountByExample="false" enableUpdateByExample="true"-->
+               <!--enableDeleteByExample="true" enableSelectByExample="true"-->
+               <!--selectByExampleQueryId="true">-->
+        <!--</table>-->
+        <!--<table tableName="board_detail" domainObjectName="BoardDetail"-->
+               <!--enableCountByExample="false" enableUpdateByExample="true"-->
+               <!--enableDeleteByExample="true" enableSelectByExample="true"-->
+               <!--selectByExampleQueryId="true">-->
+        <!--</table>-->
+        <!--<table tableName="memory_detail" domainObjectName="MemoryDetail"-->
+               <!--enableCountByExample="false" enableUpdateByExample="true"-->
+               <!--enableDeleteByExample="true" enableSelectByExample="true"-->
+               <!--selectByExampleQueryId="true">-->
+        <!--</table>-->
+        <!--<table tableName="power_detail" domainObjectName="PowerDetail"-->
+               <!--enableCountByExample="false" enableUpdateByExample="true"-->
+               <!--enableDeleteByExample="true" enableSelectByExample="true"-->
+               <!--selectByExampleQueryId="true">-->
+        <!--</table>-->
     </context>
 </generatorConfiguration>

@@ -32,7 +32,9 @@ public class UserServiceImpl implements UserService{
         userDto.setUserAccount(userAccountMapper.selectByPrimaryKey(userId));
         userDto.setUserInfo(userInfoMapper.selectByPrimaryKey(userId));
         userDto.setUserRole(userRoleMapper.selectByPrimaryKey(userId));
-        userDto.getUserAccount().setUserPasswd("");
+        if(userDto.getUserAccount() != null){
+            userDto.getUserAccount().setUserPasswd("");
+        }
         return userDto;
     }
 

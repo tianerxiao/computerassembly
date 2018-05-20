@@ -10,7 +10,24 @@ import java.util.List;
 @Service
 public interface OrderService {
     void addComputerOrder(ComputerPart computerPart, ComputerOrder computerOrder);
+
+    void updateComputerOrderByKey(ComputerOrder computerOrder);
+
     ComputerOrder getComputerOrder(ComputerOrder computerOrder);
+
     ComputerPart getComputerPart(ComputerPart computerPart);
-    List<OrderDto> getOrderList(String userId);
+
+    List<OrderDto> getNotPayOrderList(String userId);
+
+    List<OrderDto> getNotExpOrderList(String userId);
+
+    List<OrderDto> getNotSignOrderList(String userId);
+
+    List<OrderDto> getPayOrderList(String userId);
+
+    List<OrderDto> getExpOrderList(String userId);
+
+    List<OrderDto> getSignOrderList(String userId);
+
+    void deleteComputerOrderByKey(ComputerOrder computerOrder);
 }

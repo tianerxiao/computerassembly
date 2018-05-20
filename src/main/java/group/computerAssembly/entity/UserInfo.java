@@ -9,11 +9,14 @@ public class UserInfo {
 
     private String userPhone;
 
-    public UserInfo(String userId, String userName, String userEmail, String userPhone) {
+    private String userAddress;
+
+    public UserInfo(String userId, String userName, String userEmail, String userPhone, String userAddress) {
         this.userId = userId;
         this.userName = userName;
         this.userEmail = userEmail;
         this.userPhone = userPhone;
+        this.userAddress = userAddress;
     }
 
     public UserInfo() {
@@ -50,5 +53,13 @@ public class UserInfo {
 
     public void setUserPhone(String userPhone) {
         this.userPhone = userPhone == null ? null : userPhone.trim();
+    }
+
+    public String getUserAddress() {
+        return userAddress;
+    }
+
+    public void setUserAddress(String userAddress) {
+        this.userAddress = userAddress == null ? null : userAddress.trim();
     }
 }

@@ -143,13 +143,7 @@ public class PartController {
             message.setCode(MessageCode.nologin);
             return message;
         }
-        if(userService.getUserRole(userId).getUserRole() == 2){
-            return partService.getPartById(searchContent);
-        }else {
-            message.setData("无权限");
-            message.setCode(MessageCode.forbidden);
-            return message;
-        }
+        return partService.getPartById(searchContent);
     }
 
     @DeleteMapping("/delete-part")

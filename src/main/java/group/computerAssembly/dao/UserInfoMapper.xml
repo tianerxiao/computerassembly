@@ -7,6 +7,7 @@
       <arg column="user_name" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="user_email" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="user_phone" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="user_address" jdbcType="VARCHAR" javaType="java.lang.String" />
     </constructor>
   </resultMap>
   <sql id="Example_Where_Clause" >
@@ -38,8 +39,37 @@
       </foreach>
     </where>
   </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
   <sql id="Base_Column_List" >
-    user_id, user_name, user_email, user_phone
+    user_id, user_name, user_email, user_phone, user_address
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="group.computerAssembly.entity.UserInfoExample" >
     select
@@ -66,11 +96,17 @@
     delete from user_info
     where user_id = #{userId,jdbcType=VARCHAR}
   </delete>
+  <delete id="deleteByExample" parameterType="group.computerAssembly.entity.UserInfoExample" >
+    delete from user_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
   <insert id="insert" parameterType="group.computerAssembly.entity.UserInfo" >
     insert into user_info (user_id, user_name, user_email, 
-      user_phone)
+      user_phone, user_address)
     values (#{userId,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{userEmail,jdbcType=VARCHAR}, 
-      #{userPhone,jdbcType=VARCHAR})
+      #{userPhone,jdbcType=VARCHAR}, #{userAddress,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="group.computerAssembly.entity.UserInfo" >
     insert into user_info
@@ -87,6 +123,9 @@
       <if test="userPhone != null" >
         user_phone,
       </if>
+      <if test="userAddress != null" >
+        user_address,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="userId != null" >
@@ -101,8 +140,45 @@
       <if test="userPhone != null" >
         #{userPhone,jdbcType=VARCHAR},
       </if>
+      <if test="userAddress != null" >
+        #{userAddress,jdbcType=VARCHAR},
+      </if>
     </trim>
   </insert>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update user_info
+    <set >
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userName != null" >
+        user_name = #{record.userName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userEmail != null" >
+        user_email = #{record.userEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userPhone != null" >
+        user_phone = #{record.userPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userAddress != null" >
+        user_address = #{record.userAddress,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update user_info
+    set user_id = #{record.userId,jdbcType=VARCHAR},
+      user_name = #{record.userName,jdbcType=VARCHAR},
+      user_email = #{record.userEmail,jdbcType=VARCHAR},
+      user_phone = #{record.userPhone,jdbcType=VARCHAR},
+      user_address = #{record.userAddress,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
   <update id="updateByPrimaryKeySelective" parameterType="group.computerAssembly.entity.UserInfo" >
     update user_info
     <set >
@@ -115,6 +191,9 @@
       <if test="userPhone != null" >
         user_phone = #{userPhone,jdbcType=VARCHAR},
       </if>
+      <if test="userAddress != null" >
+        user_address = #{userAddress,jdbcType=VARCHAR},
+      </if>
     </set>
     where user_id = #{userId,jdbcType=VARCHAR}
   </update>
@@ -122,7 +201,8 @@
     update user_info
     set user_name = #{userName,jdbcType=VARCHAR},
       user_email = #{userEmail,jdbcType=VARCHAR},
-      user_phone = #{userPhone,jdbcType=VARCHAR}
+      user_phone = #{userPhone,jdbcType=VARCHAR},
+      user_address = #{userAddress,jdbcType=VARCHAR}
     where user_id = #{userId,jdbcType=VARCHAR}
   </update>
 </mapper>

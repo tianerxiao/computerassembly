@@ -514,6 +514,216 @@ public class ComputerOrderExample {
             addCriterion("price not between", value1, value2, "price");
             return (Criteria) this;
         }
+
+        public Criteria andPayIsNull() {
+            addCriterion("pay is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayIsNotNull() {
+            addCriterion("pay is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayEqualTo(String value) {
+            addCriterion("pay =", value, "pay");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayNotEqualTo(String value) {
+            addCriterion("pay <>", value, "pay");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayGreaterThan(String value) {
+            addCriterion("pay >", value, "pay");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayGreaterThanOrEqualTo(String value) {
+            addCriterion("pay >=", value, "pay");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayLessThan(String value) {
+            addCriterion("pay <", value, "pay");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayLessThanOrEqualTo(String value) {
+            addCriterion("pay <=", value, "pay");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayLike(String value) {
+            addCriterion("pay like", value, "pay");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayNotLike(String value) {
+            addCriterion("pay not like", value, "pay");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayIn(List<String> values) {
+            addCriterion("pay in", values, "pay");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayNotIn(List<String> values) {
+            addCriterion("pay not in", values, "pay");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayBetween(String value1, String value2) {
+            addCriterion("pay between", value1, value2, "pay");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayNotBetween(String value1, String value2) {
+            addCriterion("pay not between", value1, value2, "pay");
+            return (Criteria) this;
+        }
+
+        public Criteria andExpressIsNull() {
+            addCriterion("express is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andExpressIsNotNull() {
+            addCriterion("express is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andExpressEqualTo(String value) {
+            addCriterion("express =", value, "express");
+            return (Criteria) this;
+        }
+
+        public Criteria andExpressNotEqualTo(String value) {
+            addCriterion("express <>", value, "express");
+            return (Criteria) this;
+        }
+
+        public Criteria andExpressGreaterThan(String value) {
+            addCriterion("express >", value, "express");
+            return (Criteria) this;
+        }
+
+        public Criteria andExpressGreaterThanOrEqualTo(String value) {
+            addCriterion("express >=", value, "express");
+            return (Criteria) this;
+        }
+
+        public Criteria andExpressLessThan(String value) {
+            addCriterion("express <", value, "express");
+            return (Criteria) this;
+        }
+
+        public Criteria andExpressLessThanOrEqualTo(String value) {
+            addCriterion("express <=", value, "express");
+            return (Criteria) this;
+        }
+
+        public Criteria andExpressLike(String value) {
+            addCriterion("express like", value, "express");
+            return (Criteria) this;
+        }
+
+        public Criteria andExpressNotLike(String value) {
+            addCriterion("express not like", value, "express");
+            return (Criteria) this;
+        }
+
+        public Criteria andExpressIn(List<String> values) {
+            addCriterion("express in", values, "express");
+            return (Criteria) this;
+        }
+
+        public Criteria andExpressNotIn(List<String> values) {
+            addCriterion("express not in", values, "express");
+            return (Criteria) this;
+        }
+
+        public Criteria andExpressBetween(String value1, String value2) {
+            addCriterion("express between", value1, value2, "express");
+            return (Criteria) this;
+        }
+
+        public Criteria andExpressNotBetween(String value1, String value2) {
+            addCriterion("express not between", value1, value2, "express");
+            return (Criteria) this;
+        }
+
+        public Criteria andSignIsNull() {
+            addCriterion("sign is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSignIsNotNull() {
+            addCriterion("sign is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSignEqualTo(String value) {
+            addCriterion("sign =", value, "sign");
+            return (Criteria) this;
+        }
+
+        public Criteria andSignNotEqualTo(String value) {
+            addCriterion("sign <>", value, "sign");
+            return (Criteria) this;
+        }
+
+        public Criteria andSignGreaterThan(String value) {
+            addCriterion("sign >", value, "sign");
+            return (Criteria) this;
+        }
+
+        public Criteria andSignGreaterThanOrEqualTo(String value) {
+            addCriterion("sign >=", value, "sign");
+            return (Criteria) this;
+        }
+
+        public Criteria andSignLessThan(String value) {
+            addCriterion("sign <", value, "sign");
+            return (Criteria) this;
+        }
+
+        public Criteria andSignLessThanOrEqualTo(String value) {
+            addCriterion("sign <=", value, "sign");
+            return (Criteria) this;
+        }
+
+        public Criteria andSignLike(String value) {
+            addCriterion("sign like", value, "sign");
+            return (Criteria) this;
+        }
+
+        public Criteria andSignNotLike(String value) {
+            addCriterion("sign not like", value, "sign");
+            return (Criteria) this;
+        }
+
+        public Criteria andSignIn(List<String> values) {
+            addCriterion("sign in", values, "sign");
+            return (Criteria) this;
+        }
+
+        public Criteria andSignNotIn(List<String> values) {
+            addCriterion("sign not in", values, "sign");
+            return (Criteria) this;
+        }
+
+        public Criteria andSignBetween(String value1, String value2) {
+            addCriterion("sign between", value1, value2, "sign");
+            return (Criteria) this;
+        }
+
+        public Criteria andSignNotBetween(String value1, String value2) {
+            addCriterion("sign not between", value1, value2, "sign");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {
