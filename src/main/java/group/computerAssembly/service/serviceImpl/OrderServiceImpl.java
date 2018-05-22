@@ -101,7 +101,9 @@ public class OrderServiceImpl implements OrderService {
             criteria1.andUserIdEqualTo(userId);
         }
         criteria1.andSignIsNull();
-        criteria1.andExpressEqualTo("已发货");
+        criteria1.andPayEqualTo("已付款");
+        criteria1.andExpressIsNotNull();
+        criteria1.andCommentIsNull();
         List<ComputerOrder> computerOrderList = computerOrderMapper.selectByExample(computerOrderExample);
 
         for (Integer i = 0; i<computerOrderList.size(); i++){
@@ -142,7 +144,7 @@ public class OrderServiceImpl implements OrderService {
         if(!"super".equals(userId)){
             criteria1.andUserIdEqualTo(userId);
         }
-        criteria1.andExpressEqualTo("已发货");
+        criteria1.andExpressIsNotNull();
         criteria1.andSignIsNull();
         List<ComputerOrder> computerOrderList = computerOrderMapper.selectByExample(computerOrderExample);
 
@@ -164,7 +166,7 @@ public class OrderServiceImpl implements OrderService {
             criteria1.andUserIdEqualTo(userId);
         }
         criteria1.andSignEqualTo("已签收");
-        criteria1.andCommentIsNull();
+        criteria1.andCommentIsNotNull();
         List<ComputerOrder> computerOrderList = computerOrderMapper.selectByExample(computerOrderExample);
 
         for (Integer i = 0; i<computerOrderList.size(); i++){

@@ -10,7 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="computerassembly" target="1.6" />
+      <module name="computerassembly" target="1.7" />
     </bytecodeTargetLevel>
   </component>
 </project>

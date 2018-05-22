@@ -119,11 +119,11 @@
                <!--enableDeleteByExample="false" enableSelectByExample="true"-->
                <!--selectByExampleQueryId="true">-->
         <!--</table>-->
-        <table tableName="user_info" domainObjectName="UserInfo"
-               enableCountByExample="false" enableUpdateByExample="true"
-               enableDeleteByExample="true" enableSelectByExample="true"
-               selectByExampleQueryId="true">
-        </table>
+        <!--<table tableName="user_info" domainObjectName="UserInfo"-->
+               <!--enableCountByExample="false" enableUpdateByExample="true"-->
+               <!--enableDeleteByExample="true" enableSelectByExample="true"-->
+               <!--selectByExampleQueryId="true">-->
+        <!--</table>-->
         <!--<table tableName="user_role" domainObjectName="UserRole"-->
                <!--enableCountByExample="false" enableUpdateByExample="false"-->
                <!--enableDeleteByExample="false" enableSelectByExample="true"-->
@@ -151,6 +151,16 @@
                <!--selectByExampleQueryId="true">-->
         <!--</table>-->
         <!--<table tableName="power_detail" domainObjectName="PowerDetail"-->
+               <!--enableCountByExample="false" enableUpdateByExample="true"-->
+               <!--enableDeleteByExample="true" enableSelectByExample="true"-->
+               <!--selectByExampleQueryId="true">-->
+        <!--</table>-->
+        <!--<table tableName="news" domainObjectName="News"-->
+        <!--enableCountByExample="false" enableUpdateByExample="true"-->
+        <!--enableDeleteByExample="true" enableSelectByExample="true"-->
+        <!--selectByExampleQueryId="true">-->
+        <!--</table>-->
+        <!--<table tableName="imagedv" domainObjectName="Imagedv"-->
                <!--enableCountByExample="false" enableUpdateByExample="true"-->
                <!--enableDeleteByExample="true" enableSelectByExample="true"-->
                <!--selectByExampleQueryId="true">-->
