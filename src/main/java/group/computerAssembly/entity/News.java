@@ -5,21 +5,21 @@ public class News {
 
     private String title;
 
+    private String note;
+
     private String img;
 
     private String savetime;
 
     private String type;
 
-    private String note;
-
-    public News(Long id, String title, String img, String savetime, String type, String note) {
+    public News(Long id, String title, String note, String img, String savetime, String type) {
         this.id = id;
         this.title = title;
+        this.note = note;
         this.img = img;
         this.savetime = savetime;
         this.type = type;
-        this.note = note;
     }
 
     public News() {
@@ -40,6 +40,14 @@ public class News {
 
     public void setTitle(String title) {
         this.title = title == null ? null : title.trim();
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note == null ? null : note.trim();
     }
 
     public String getImg() {
@@ -64,13 +72,5 @@ public class News {
 
     public void setType(String type) {
         this.type = type == null ? null : type.trim();
-    }
-
-    public String getNote() {
-        return note;
-    }
-
-    public void setNote(String note) {
-        this.note = note == null ? null : note.trim();
     }
 }

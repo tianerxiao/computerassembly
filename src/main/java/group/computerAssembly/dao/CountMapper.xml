@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="group.computerAssembly.dao.CountMapper">
+    <select id="getOrderCount" resultType="group.computerAssembly.entity.Count">
+       SELECT COUNT(order_id) AS num,DATE_FORMAT(create_time,'%Y-%m-%d') AS time FROM computer_order GROUP BY time
+    </select>
+    <select id="getAccountCount" resultType="group.computerAssembly.entity.Count">
+        SELECT COUNT(user_id) AS num,DATE_FORMAT(create_time,'%Y-%m-%d') AS time FROM user_account GROUP BY time
+    </select>
+    <select id="getOrderPriceSum" resultType="group.computerAssembly.entity.Count">
+        SELECT SUM(price) AS num,DATE_FORMAT(create_time,'%Y-%m-%d') AS time FROM computer_order GROUP BY time
+    </select>
+</mapper>
