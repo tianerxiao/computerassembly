@@ -166,10 +166,22 @@
                <!--enableDeleteByExample="true" enableSelectByExample="true"-->
                <!--selectByExampleQueryId="true">-->
         <!--</table>-->
-        <table tableName="ip_access" domainObjectName="IpAccess"
-        enableCountByExample="false" enableUpdateByExample="true"
-        enableDeleteByExample="true" enableSelectByExample="true"
-        selectByExampleQueryId="true">
-        </table>
+        <!--<table tableName="ip_access" domainObjectName="IpAccess"-->
+        <!--enableCountByExample="false" enableUpdateByExample="true"-->
+        <!--enableDeleteByExample="true" enableSelectByExample="true"-->
+        <!--selectByExampleQueryId="true">-->
+        <!--</table>-->
+        <!--<table tableName="fornum" domainObjectName="Fornum"-->
+        <!--enableCountByExample="false" enableUpdateByExample="true"-->
+        <!--enableDeleteByExample="true" enableSelectByExample="true"-->
+        <!--selectByExampleQueryId="true">-->
+        <!--<columnOverride column="note" javaType="java.lang.String" jdbcType="VARCHAR" />-->
+        <!--</table>-->
+        <!--<table tableName="fornum_comment" domainObjectName="FornumComment"-->
+        <!--enableCountByExample="false" enableUpdateByExample="true"-->
+        <!--enableDeleteByExample="true" enableSelectByExample="true"-->
+        <!--selectByExampleQueryId="true">-->
+        <!--<columnOverride column="comment" javaType="java.lang.String" jdbcType="VARCHAR" />-->
+        <!--</table>-->
     </context>
 </generatorConfiguration>

@@ -21,6 +21,7 @@ public class WebMvcConfigAdapter extends WebMvcConfigurationSupport {
         addInterceptor.excludePathPatterns("/static/**");
         addInterceptor.excludePathPatterns("/part/**");
         addInterceptor.excludePathPatterns("/news/**");
+        addInterceptor.excludePathPatterns("/fornum/**");
 
 
         addInterceptor.addPathPatterns("/**");
