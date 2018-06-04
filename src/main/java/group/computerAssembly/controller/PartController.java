@@ -137,12 +137,6 @@ public class PartController {
             message.setData("");
             return message;
         }
-        String userId = request.getSession().getAttribute("userId").toString();
-        if(userId==null){
-            message.setData("未登录");
-            message.setCode(MessageCode.nologin);
-            return message;
-        }
         return partService.getPartById(searchContent);
     }
 

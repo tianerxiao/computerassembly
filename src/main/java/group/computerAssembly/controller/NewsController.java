@@ -1,5 +1,6 @@
 package group.computerAssembly.controller;
 
+import group.computerAssembly.dao.CountMapper;
 import group.computerAssembly.dao.ImagedvMapper;
 import group.computerAssembly.dao.NewsMapper;
 import group.computerAssembly.dto.Message;
@@ -36,6 +37,8 @@ public class NewsController {
     NewsMapper newsMapper;
     @Autowired
     UserService userService;
+    @Autowired
+    CountMapper countMapper;
 
     private final ResourceLoader resourceLoader;
 
@@ -197,5 +200,36 @@ public class NewsController {
         message.setData(newsMapper.selectByExample(newsExample));
         message.setCode(MessageCode.ok);
         return message;
+    }
+
+    @GetMapping("/parts")
+    public @ResponseBody
+    Message getParts(){
+        Message message = new Message();
+        message.setData(countMapper.getPartByRand());
+        message.setCode(MessageCode.ok);
+        return message;
+    }
+
+    @DeleteMapping("/news/{newsId}")
+    public @ResponseBody
+    Message deleteNews(HttpServletRequest request,@PathVariable("newsId") String newsId) {
+        Message message = new Message();
+        String userId = request.getSession().getAttribute("userId").toString();
+        if (userId == null) {
+            message.setData("未登录");
+            message.setCode(MessageCode.nologin);
+            return message;
+        }
+        if (userService.getUserRole(userId).getUserRole() == 2) {
+            newsMapper.deleteByPrimaryKey(Long.parseLong(newsId));
+            message.setData("删除成功");
+            message.setCode(MessageCode.ok);
+            return message;
+        } else {
+            message.setData("无权限");
+            message.setCode(MessageCode.forbidden);
+            return message;
+        }
     }
 }

@@ -57,7 +57,7 @@ public class UserServiceImpl implements UserService{
         UserInfo userInfo =  new UserInfo();
         UserRole userRole = new UserRole();
         userRole.setUserId(userAccount.getUserId());
-        userRole.setUserRole(2);
+        userRole.setUserRole(1);
         userInfo.setUserId(userAccount.getUserId());
         userInfo.setUserEmail("");
         userInfo.setUserName("");

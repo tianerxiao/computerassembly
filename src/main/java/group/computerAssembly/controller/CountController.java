@@ -33,9 +33,33 @@ public class CountController {
     }
     @GetMapping("/accountCount")
     public @ResponseBody
-    Message getAccountCountCount(){
+    Message getAccountCount(){
         Message message = new Message();
         message.setData(countMapper.getAccountCount());
+        message.setCode(MessageCode.ok);
+        return message;
+    }
+    @GetMapping("/orderCountMonth")
+    public @ResponseBody
+    Message getOrderCountMonth(){
+        Message message = new Message();
+        message.setData(countMapper.getOrderCountMonth());
+        message.setCode(MessageCode.ok);
+        return message;
+    }
+    @GetMapping("/orderPriceSumMonth")
+    public @ResponseBody
+    Message getOrderPriceSumMonth(){
+        Message message = new Message();
+        message.setData(countMapper.getOrderPriceSumMonth());
+        message.setCode(MessageCode.ok);
+        return message;
+    }
+    @GetMapping("/accountCountMonth")
+    public @ResponseBody
+    Message getAccountCountMonth(){
+        Message message = new Message();
+        message.setData(countMapper.getAccountCountMonth());
         message.setCode(MessageCode.ok);
         return message;
     }

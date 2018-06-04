@@ -10,4 +10,16 @@
     <select id="getOrderPriceSum" resultType="group.computerAssembly.entity.Count">
         SELECT SUM(price) AS num,DATE_FORMAT(create_time,'%Y-%m-%d') AS time FROM computer_order GROUP BY time
     </select>
+    <select id="getOrderCountMonth" resultType="group.computerAssembly.entity.Count">
+        SELECT COUNT(order_id) AS num,DATE_FORMAT(create_time,'%Y-%m') AS time FROM computer_order GROUP BY time
+    </select>
+    <select id="getAccountCountMonth" resultType="group.computerAssembly.entity.Count">
+        SELECT COUNT(user_id) AS num,DATE_FORMAT(create_time,'%Y-%m') AS time FROM user_account GROUP BY time
+    </select>
+    <select id="getOrderPriceSumMonth" resultType="group.computerAssembly.entity.Count">
+        SELECT SUM(price) AS num,DATE_FORMAT(create_time,'%Y-%m') AS time FROM computer_order GROUP BY time
+    </select>
+    <select id="getPartByRand" resultType="group.computerAssembly.entity.ComputerPart">
+        SELECT * FROM computer_part ORDER BY RAND()LIMIT 5
+    </select>
 </mapper>
