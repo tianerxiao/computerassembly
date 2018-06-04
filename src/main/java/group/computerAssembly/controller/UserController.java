@@ -4,6 +4,7 @@ import group.computerAssembly.dto.Message;
 import group.computerAssembly.dto.UserDto;
 import group.computerAssembly.entity.UserAccount;
 import group.computerAssembly.entity.UserInfo;
+import group.computerAssembly.entity.UserRole;
 import group.computerAssembly.enums.MessageCode;
 import group.computerAssembly.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -207,4 +208,60 @@ public class UserController {
         }
     }
 
+    @PutMapping("/user-role")
+    public @ResponseBody
+    Message putUserRole(HttpServletRequest request, @RequestBody UserRole userRole){
+        Message msg = new Message();
+        if(request.getSession().getAttribute("userId")==null){
+            msg.setData("未登录");
+            msg.setCode(MessageCode.nologin);
+            return msg;
+        }
+        String sessionId = request.getSession().getAttribute("userId").toString();
+        if(userService.findUserById(sessionId).getUserRole().getUserRole() ==2){
+            try {
+                userService.updateUserRole(userRole.getUserId(),userRole.getUserRole());
+                msg.setData("更新成功");
+                msg.setCode(MessageCode.ok);
+                return msg;
+            }catch (Exception e){
+                e.printStackTrace();
+                msg.setData("更新失败");
+                msg.setCode(MessageCode.ok);
+                return msg;
+            }
+        }else {
+            msg.setData("无权限");
+            msg.setCode(MessageCode.forbidden);
+            return msg;
+        }
+    }
+    @DeleteMapping("/user-role")
+    public @ResponseBody
+    Message deleteUserRole(HttpServletRequest request,@RequestParam("userId") String userId){
+        Message msg = new Message();
+        if(request.getSession().getAttribute("userId")==null){
+            msg.setData("未登录");
+            msg.setCode(MessageCode.nologin);
+            return msg;
+        }
+        String sessionId = request.getSession().getAttribute("userId").toString();
+        if(userService.findUserById(sessionId).getUserRole().getUserRole() ==2){
+            try {
+                userService.updateUserRole(userId,1);
+                msg.setData("更新成功");
+                msg.setCode(MessageCode.ok);
+                return msg;
+            }catch (Exception e){
+                e.printStackTrace();
+                msg.setData("更新失败");
+                msg.setCode(MessageCode.ok);
+                return msg;
+            }
+        }else {
+            msg.setData("无权限");
+            msg.setCode(MessageCode.forbidden);
+            return msg;
+        }
+    }
 }

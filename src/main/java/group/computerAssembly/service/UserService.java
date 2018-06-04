@@ -17,4 +17,5 @@ public interface UserService {
     void updateUserInfo(UserInfo userInfo);
     UserRole getUserRole(String userId);
     List<UserDto> getUserList();
+    void updateUserRole(String userId,Integer role);
 }

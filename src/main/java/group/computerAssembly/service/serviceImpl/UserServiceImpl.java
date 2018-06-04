@@ -100,4 +100,12 @@ public class UserServiceImpl implements UserService{
         }
         return userDtoList;
     }
+
+    @Override
+    public void updateUserRole(String userId,Integer role) {
+        UserRole userRole = new UserRole();
+        userRole.setUserRole(role);
+        userRole.setUserId(userId);
+        userRoleMapper.updateByPrimaryKey(userRole);
+    }
 }
